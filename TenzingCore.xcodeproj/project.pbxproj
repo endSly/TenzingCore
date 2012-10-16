@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D63381C162DEAB0006BFA8B /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */; };
+		0D63381E162DF38A006BFA8B /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */; };
+		0D63381F162DF38A006BFA8B /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264C162DC88900649563 /* NSArray+Additions.m */; };
+		0D633820162DF38A006BFA8B /* NSMutableArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */; };
+		0D633823162DF859006BFA8B /* NSNumber+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D633822162DF859006BFA8B /* NSNumber+Additions.m */; };
+		0D633824162DF9A8006BFA8B /* NSNumber+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D633822162DF859006BFA8B /* NSNumber+Additions.m */; };
 		0DCE2623162DC7F500649563 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2622162DC7F500649563 /* Foundation.framework */; };
 		0DCE2628162DC7F500649563 /* TenzingCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0DCE2627162DC7F500649563 /* TenzingCore.h */; };
-		0DCE262A162DC7F500649563 /* TenzingCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2629162DC7F500649563 /* TenzingCore.m */; };
 		0DCE2632162DC7F500649563 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2631162DC7F500649563 /* SenTestingKit.framework */; };
 		0DCE2634162DC7F500649563 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2633162DC7F500649563 /* UIKit.framework */; };
 		0DCE2635162DC7F500649563 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2622162DC7F500649563 /* Foundation.framework */; };
 		0DCE2638162DC7F500649563 /* libTenzingCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE261F162DC7F500649563 /* libTenzingCore.a */; };
 		0DCE263E162DC7F500649563 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DCE263C162DC7F500649563 /* InfoPlist.strings */; };
 		0DCE2641162DC7F500649563 /* TenzingCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2640162DC7F500649563 /* TenzingCoreTests.m */; };
+		0DCE264D162DC88900649563 /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264C162DC88900649563 /* NSArray+Additions.m */; };
+		0DCE2650162DCEFB00649563 /* NSMutableArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,11 +49,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D63381A162DEAB0006BFA8B /* NSObject+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Additions.h"; sourceTree = "<group>"; };
+		0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Additions.m"; sourceTree = "<group>"; };
+		0D633821162DF859006BFA8B /* NSNumber+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Additions.h"; sourceTree = "<group>"; };
+		0D633822162DF859006BFA8B /* NSNumber+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Additions.m"; sourceTree = "<group>"; };
 		0DCE261F162DC7F500649563 /* libTenzingCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTenzingCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DCE2622162DC7F500649563 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0DCE2626162DC7F500649563 /* TenzingCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TenzingCore-Prefix.pch"; sourceTree = "<group>"; };
 		0DCE2627162DC7F500649563 /* TenzingCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TenzingCore.h; sourceTree = "<group>"; };
-		0DCE2629162DC7F500649563 /* TenzingCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TenzingCore.m; sourceTree = "<group>"; };
 		0DCE2630162DC7F500649563 /* TenzingCoreTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TenzingCoreTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DCE2631162DC7F500649563 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0DCE2633162DC7F500649563 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -54,6 +64,10 @@
 		0DCE263D162DC7F500649563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0DCE263F162DC7F500649563 /* TenzingCoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TenzingCoreTests.h; sourceTree = "<group>"; };
 		0DCE2640162DC7F500649563 /* TenzingCoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TenzingCoreTests.m; sourceTree = "<group>"; };
+		0DCE264B162DC88900649563 /* NSArray+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Additions.h"; sourceTree = "<group>"; };
+		0DCE264C162DC88900649563 /* NSArray+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Additions.m"; sourceTree = "<group>"; };
+		0DCE264E162DCEFB00649563 /* NSMutableArray+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Additions.h"; sourceTree = "<group>"; };
+		0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Additions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,8 +126,15 @@
 			isa = PBXGroup;
 			children = (
 				0DCE2627162DC7F500649563 /* TenzingCore.h */,
-				0DCE2629162DC7F500649563 /* TenzingCore.m */,
 				0DCE2625162DC7F500649563 /* Supporting Files */,
+				0D63381A162DEAB0006BFA8B /* NSObject+Additions.h */,
+				0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */,
+				0DCE264B162DC88900649563 /* NSArray+Additions.h */,
+				0DCE264C162DC88900649563 /* NSArray+Additions.m */,
+				0DCE264E162DCEFB00649563 /* NSMutableArray+Additions.h */,
+				0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */,
+				0D633821162DF859006BFA8B /* NSNumber+Additions.h */,
+				0D633822162DF859006BFA8B /* NSNumber+Additions.m */,
 			);
 			path = TenzingCore;
 			sourceTree = "<group>";
@@ -243,7 +264,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DCE262A162DC7F500649563 /* TenzingCore.m in Sources */,
+				0DCE264D162DC88900649563 /* NSArray+Additions.m in Sources */,
+				0DCE2650162DCEFB00649563 /* NSMutableArray+Additions.m in Sources */,
+				0D63381C162DEAB0006BFA8B /* NSObject+Additions.m in Sources */,
+				0D633823162DF859006BFA8B /* NSNumber+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D633824162DF9A8006BFA8B /* NSNumber+Additions.m in Sources */,
+				0D63381E162DF38A006BFA8B /* NSObject+Additions.m in Sources */,
+				0D63381F162DF38A006BFA8B /* NSArray+Additions.m in Sources */,
+				0D633820162DF38A006BFA8B /* NSMutableArray+Additions.m in Sources */,
 				0DCE2641162DC7F500649563 /* TenzingCoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +425,7 @@
 				0DCE2646162DC7F500649563 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0DCE2647162DC7F500649563 /* Build configuration list for PBXNativeTarget "TenzingCoreTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +434,7 @@
 				0DCE2649162DC7F500649563 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

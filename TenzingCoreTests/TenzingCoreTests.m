@@ -8,6 +8,13 @@
 
 #import "TenzingCoreTests.h"
 
+#import "NSObject+Additions.h"
+#import "NSNumber+Additions.h"
+
+@interface NSString (Dynamic)
+- (NSString *)dynamicStringMultiply:(NSNumber*)count;
+@end
+
 @implementation TenzingCoreTests
 
 - (void)setUp
@@ -26,7 +33,26 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in TenzingCoreTests");
+    //STFail(@"Unit tests are not implemented yet in TenzingCoreTests");
+}
+
+- (void)testDynamicMethods
+{
+    [NSString defineMethod:@selector(dynamicStringMultiply:) do:^id(NSString *self, ...) {
+        va_list ap;
+        va_start(ap, self);
+        NSNumber *count = va_arg(ap, id);
+        va_end(ap);
+        
+        NSMutableString *s = [NSMutableString string];
+        
+        [count times:^(NSInteger value) {
+            [s appendFormat:@"%@", self];
+        }];
+        
+        return s;
+    }];
+    STAssertEqualObjects([@"12" dynamicStringMultiply:@4], @"12121212", @"Dynamic methods should work");
 }
 
 @end

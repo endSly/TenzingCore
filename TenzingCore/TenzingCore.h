@@ -6,8 +6,3 @@
 //  Copyright (c) 2012 Tenzing. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-@interface TenzingCore : NSObject
-
-@end
