@@ -19,6 +19,19 @@
 + (NSString *)three;
 @end
 
+@interface TestClass : NSObject
+
+@property NSNumber *aNumber;
+@property TestClass *test;
+
+@end
+
+@implementation TestClass
+
+@synthesize aNumber;
+
+@end
+
 @implementation TenzingCoreTests
 
 - (void)setUp
@@ -63,6 +76,12 @@
     STAssertEqualObjects([NSString one], @"One", @"Dynamic class methods should work");
     STAssertEqualObjects([NSString two], @"Two", @"Dynamic class methods should work");
     STAssertEqualObjects([NSString three], @"Three", @"Dynamic class methods should work");
+    
+    //STAssertEqualObjects([TestClass instanceProperties], @[@"aNumber", @"test"], @"Properties list should be computed");
+    STAssertEqualObjects(NSNumber.class, [TestClass classForProperty:@"aNumber"], @"Class of properties should be computed");
+    
+    TestClass *test = [[TestClass alloc] initWithValuesInDictionary:@{@"aNumber": @5, @"test": @{@"aNumber": @8}}];
+    STAssertEqualObjects(@8, test.test.aNumber, @"Init with key values dictionary should work");
     
     
 }

@@ -10,6 +10,8 @@
 
 @interface NSObject (Additions)
 
+- (id)initWithValuesInDictionary:(NSDictionary *)dict;
+
 - (id)trySelector:(SEL)selector;
 - (id)trySelector:(SEL)selector withObject:(id)obj;
 - (id)trySelector:(SEL)selector withObject:(id)obj0 withObject:(id)obj1;
@@ -19,5 +21,7 @@
 
 + (NSArray *)instanceMethods;
 + (NSArray *)instanceProperties;
++ (Class)classForProperty:(NSString *)propertyName;
++ (BOOL)hasProperty:(NSString *)propertyName;
 
 @end
