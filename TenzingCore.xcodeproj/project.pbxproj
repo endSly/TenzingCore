@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0DCE2623162DC7F500649563 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2622162DC7F500649563 /* Foundation.framework */; };
+		0DCE2628162DC7F500649563 /* TenzingCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0DCE2627162DC7F500649563 /* TenzingCore.h */; };
+		0DCE262A162DC7F500649563 /* TenzingCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2629162DC7F500649563 /* TenzingCore.m */; };
+		0DCE2632162DC7F500649563 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2631162DC7F500649563 /* SenTestingKit.framework */; };
+		0DCE2634162DC7F500649563 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2633162DC7F500649563 /* UIKit.framework */; };
+		0DCE2635162DC7F500649563 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2622162DC7F500649563 /* Foundation.framework */; };
+		0DCE2638162DC7F500649563 /* libTenzingCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE261F162DC7F500649563 /* libTenzingCore.a */; };
+		0DCE263E162DC7F500649563 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DCE263C162DC7F500649563 /* InfoPlist.strings */; };
+		0DCE2641162DC7F500649563 /* TenzingCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2640162DC7F500649563 /* TenzingCoreTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0DCE2636162DC7F500649563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0DCE2616162DC7F500649563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DCE261E162DC7F500649563;
+			remoteInfo = TenzingCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0DCE261D162DC7F500649563 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				0DCE2628162DC7F500649563 /* TenzingCore.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0DCE261F162DC7F500649563 /* libTenzingCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTenzingCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DCE2622162DC7F500649563 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0DCE2626162DC7F500649563 /* TenzingCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TenzingCore-Prefix.pch"; sourceTree = "<group>"; };
+		0DCE2627162DC7F500649563 /* TenzingCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TenzingCore.h; sourceTree = "<group>"; };
+		0DCE2629162DC7F500649563 /* TenzingCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TenzingCore.m; sourceTree = "<group>"; };
+		0DCE2630162DC7F500649563 /* TenzingCoreTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TenzingCoreTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DCE2631162DC7F500649563 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		0DCE2633162DC7F500649563 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		0DCE263B162DC7F500649563 /* TenzingCoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TenzingCoreTests-Info.plist"; sourceTree = "<group>"; };
+		0DCE263D162DC7F500649563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0DCE263F162DC7F500649563 /* TenzingCoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TenzingCoreTests.h; sourceTree = "<group>"; };
+		0DCE2640162DC7F500649563 /* TenzingCoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TenzingCoreTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0DCE261C162DC7F500649563 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DCE2623162DC7F500649563 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DCE262C162DC7F500649563 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DCE2632162DC7F500649563 /* SenTestingKit.framework in Frameworks */,
+				0DCE2634162DC7F500649563 /* UIKit.framework in Frameworks */,
+				0DCE2635162DC7F500649563 /* Foundation.framework in Frameworks */,
+				0DCE2638162DC7F500649563 /* libTenzingCore.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0DCE2614162DC7F500649563 = {
+			isa = PBXGroup;
+			children = (
+				0DCE2624162DC7F500649563 /* TenzingCore */,
+				0DCE2639162DC7F500649563 /* TenzingCoreTests */,
+				0DCE2621162DC7F500649563 /* Frameworks */,
+				0DCE2620162DC7F500649563 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0DCE2620162DC7F500649563 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0DCE261F162DC7F500649563 /* libTenzingCore.a */,
+				0DCE2630162DC7F500649563 /* TenzingCoreTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0DCE2621162DC7F500649563 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DCE2622162DC7F500649563 /* Foundation.framework */,
+				0DCE2631162DC7F500649563 /* SenTestingKit.framework */,
+				0DCE2633162DC7F500649563 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0DCE2624162DC7F500649563 /* TenzingCore */ = {
+			isa = PBXGroup;
+			children = (
+				0DCE2627162DC7F500649563 /* TenzingCore.h */,
+				0DCE2629162DC7F500649563 /* TenzingCore.m */,
+				0DCE2625162DC7F500649563 /* Supporting Files */,
+			);
+			path = TenzingCore;
+			sourceTree = "<group>";
+		};
+		0DCE2625162DC7F500649563 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0DCE2626162DC7F500649563 /* TenzingCore-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0DCE2639162DC7F500649563 /* TenzingCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				0DCE263F162DC7F500649563 /* TenzingCoreTests.h */,
+				0DCE2640162DC7F500649563 /* TenzingCoreTests.m */,
+				0DCE263A162DC7F500649563 /* Supporting Files */,
+			);
+			path = TenzingCoreTests;
+			sourceTree = "<group>";
+		};
+		0DCE263A162DC7F500649563 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0DCE263B162DC7F500649563 /* TenzingCoreTests-Info.plist */,
+				0DCE263C162DC7F500649563 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0DCE261E162DC7F500649563 /* TenzingCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DCE2644162DC7F500649563 /* Build configuration list for PBXNativeTarget "TenzingCore" */;
+			buildPhases = (
+				0DCE261B162DC7F500649563 /* Sources */,
+				0DCE261C162DC7F500649563 /* Frameworks */,
+				0DCE261D162DC7F500649563 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TenzingCore;
+			productName = TenzingCore;
+			productReference = 0DCE261F162DC7F500649563 /* libTenzingCore.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		0DCE262F162DC7F500649563 /* TenzingCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DCE2647162DC7F500649563 /* Build configuration list for PBXNativeTarget "TenzingCoreTests" */;
+			buildPhases = (
+				0DCE262B162DC7F500649563 /* Sources */,
+				0DCE262C162DC7F500649563 /* Frameworks */,
+				0DCE262D162DC7F500649563 /* Resources */,
+				0DCE262E162DC7F500649563 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0DCE2637162DC7F500649563 /* PBXTargetDependency */,
+			);
+			name = TenzingCoreTests;
+			productName = TenzingCoreTests;
+			productReference = 0DCE2630162DC7F500649563 /* TenzingCoreTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0DCE2616162DC7F500649563 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Tenzing;
+			};
+			buildConfigurationList = 0DCE2619162DC7F500649563 /* Build configuration list for PBXProject "TenzingCore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0DCE2614162DC7F500649563;
+			productRefGroup = 0DCE2620162DC7F500649563 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0DCE261E162DC7F500649563 /* TenzingCore */,
+				0DCE262F162DC7F500649563 /* TenzingCoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0DCE262D162DC7F500649563 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DCE263E162DC7F500649563 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0DCE262E162DC7F500649563 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0DCE261B162DC7F500649563 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DCE262A162DC7F500649563 /* TenzingCore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0DCE262B162DC7F500649563 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DCE2641162DC7F500649563 /* TenzingCoreTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0DCE2637162DC7F500649563 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DCE261E162DC7F500649563 /* TenzingCore */;
+			targetProxy = 0DCE2636162DC7F500649563 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0DCE263C162DC7F500649563 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0DCE263D162DC7F500649563 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0DCE2642162DC7F500649563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0DCE2643162DC7F500649563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0DCE2645162DC7F500649563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TenzingCore.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenzingCore/TenzingCore-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0DCE2646162DC7F500649563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TenzingCore.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenzingCore/TenzingCore-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		0DCE2648162DC7F500649563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenzingCore/TenzingCore-Prefix.pch";
+				INFOPLIST_FILE = "TenzingCoreTests/TenzingCoreTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0DCE2649162DC7F500649563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenzingCore/TenzingCore-Prefix.pch";
+				INFOPLIST_FILE = "TenzingCoreTests/TenzingCoreTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0DCE2619162DC7F500649563 /* Build configuration list for PBXProject "TenzingCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DCE2642162DC7F500649563 /* Debug */,
+				0DCE2643162DC7F500649563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DCE2644162DC7F500649563 /* Build configuration list for PBXNativeTarget "TenzingCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DCE2645162DC7F500649563 /* Debug */,
+				0DCE2646162DC7F500649563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0DCE2647162DC7F500649563 /* Build configuration list for PBXNativeTarget "TenzingCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DCE2648162DC7F500649563 /* Debug */,
+				0DCE2649162DC7F500649563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0DCE2616162DC7F500649563 /* Project object */;
+}

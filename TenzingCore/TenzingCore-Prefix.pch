@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'TenzingCore' target in the 'TenzingCore' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
