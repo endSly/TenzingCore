@@ -50,4 +50,35 @@
     class_addMethod(self, selector, imp_implementationWithBlock(implementation), "@@:@");
 }
 
++ (void)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation
+{
+    class_addMethod(object_getClass(self.class), selector, imp_implementationWithBlock(implementation), "@@:@");
+}
+
++ (NSArray *)instanceMethods
+{
+    unsigned int count;
+    Method *methods = class_copyMethodList(self, &count);
+    NSString *methodsNames[count];
+    
+    for (int i = 0; i < count; ++i) {
+        methodsNames[i] = NSStringFromSelector(method_getName(methods[i]));
+    }
+    
+    return [NSArray arrayWithObjects:methodsNames count:count];
+}
+
++ (NSArray *)instanceProperties
+{
+    unsigned int count;
+    objc_property_t *properties = class_copyPropertyList(self, &count);
+    NSString *propertiesNames[count];
+    
+    for (int i = 0; i < count; ++i) {
+        propertiesNames[i] = [NSString stringWithUTF8String:property_getName(properties[i])];
+    }
+    
+    return [NSArray arrayWithObjects:propertiesNames count:count];
+}
+
 @end

@@ -15,5 +15,9 @@
 - (id)trySelector:(SEL)selector withObject:(id)obj0 withObject:(id)obj1;
 
 + (void)defineMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
++ (void)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
+
++ (NSArray *)instanceMethods;
++ (NSArray *)instanceProperties;
 
 @end

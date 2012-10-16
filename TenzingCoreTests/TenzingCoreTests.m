@@ -13,6 +13,10 @@
 
 @interface NSString (Dynamic)
 - (NSString *)dynamicStringMultiply:(NSNumber*)count;
+
++ (NSString *)one;
++ (NSString *)two;
++ (NSString *)three;
 @end
 
 @implementation TenzingCoreTests
@@ -29,11 +33,6 @@
     // Tear-down code here.
     
     [super tearDown];
-}
-
-- (void)testExample
-{
-    //STFail(@"Unit tests are not implemented yet in TenzingCoreTests");
 }
 
 - (void)testDynamicMethods
@@ -53,6 +52,19 @@
         return s;
     }];
     STAssertEqualObjects([@"12" dynamicStringMultiply:@4], @"12121212", @"Dynamic methods should work");
+    
+    NSDictionary *methods = @{@"one": @"One", @"two": @"Two", @"three": @"Three"};
+    for (NSString *key in methods) {
+        [NSString defineClassMethod:NSSelectorFromString(key) do:^id(NSString *self, ...) {
+            return methods[key];
+        }];
+    }
+    
+    STAssertEqualObjects([NSString one], @"One", @"Dynamic class methods should work");
+    STAssertEqualObjects([NSString two], @"Two", @"Dynamic class methods should work");
+    STAssertEqualObjects([NSString three], @"Three", @"Dynamic class methods should work");
+    
+    
 }
 
 @end
