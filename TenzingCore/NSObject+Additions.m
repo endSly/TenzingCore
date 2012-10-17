@@ -22,6 +22,8 @@
                 continue;
             
             id value = dict[key];
+            
+            // Encode recursively objects
             if ([value isKindOfClass:[NSDictionary class]]) {
                 Class class = [self.class classForProperty:key];
                 if (class && class != [NSDictionary class]) {
@@ -41,6 +43,18 @@
         }
     }
     return self;
+}
+
+- (NSDictionary *)asDictionary
+{
+    NSArray *properties = [self.class instanceProperties];
+    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:properties.count];
+    for (NSString *property in properties) {
+        id value = [self valueForKey:property];
+        
+        d[property] = value;
+    }
+    return d;
 }
 
 - (id)trySelector:(SEL)selector

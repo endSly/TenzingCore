@@ -13,6 +13,7 @@
 
 @interface NSString (Dynamic)
 - (NSString *)dynamicStringMultiply:(NSNumber*)count;
+- (NSString *)dynamicStringMultiply:(NSNumber*)count separator:(NSString *)separator;
 
 + (NSString *)one;
 + (NSString *)two;
@@ -48,7 +49,7 @@
     [super tearDown];
 }
 
-- (void)testDynamicMethods
+- (void)testMetaProgramming
 {
     [NSString defineMethod:@selector(dynamicStringMultiply:) do:^id(NSString *self, ...) {
         va_list ap;
@@ -64,7 +65,25 @@
         
         return s;
     }];
+    
+    [NSString defineMethod:@selector(dynamicStringMultiply:separator:) do:^id(NSString *self, ...) {
+        va_list ap;
+        va_start(ap, self);
+        NSNumber *count = va_arg(ap, id);
+        NSString *separator = va_arg(ap, id);
+        va_end(ap);
+        
+        NSMutableString *s = [NSMutableString string];
+        
+        [count times:^(NSInteger value) {
+            [s appendFormat:@"%@%@", self, separator];
+        }];
+        
+        return s;
+    }];
+    
     STAssertEqualObjects([@"12" dynamicStringMultiply:@4], @"12121212", @"Dynamic methods should work");
+    STAssertEqualObjects([@"12" dynamicStringMultiply:@4 separator:@","], @"12,12,12,12,", @"Dynamic methods should work");
     
     NSDictionary *methods = @{@"one": @"One", @"two": @"Two", @"three": @"Three"};
     for (NSString *key in methods) {
@@ -81,6 +100,7 @@
     STAssertEqualObjects(NSNumber.class, [TestClass classForProperty:@"aNumber"], @"Class of properties should be computed");
     
     TestClass *test = [[TestClass alloc] initWithValuesInDictionary:@{@"aNumber": @5, @"test": @{@"aNumber": @8}}];
+    STAssertEqualObjects(@5, test.aNumber, @"Init with key values dictionary should work");
     STAssertEqualObjects(@8, test.test.aNumber, @"Init with key values dictionary should work");
     
     
