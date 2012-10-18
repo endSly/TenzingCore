@@ -10,12 +10,18 @@
 
 @interface NSArray (Additions)
 
-- (NSArray *)map:(id(^)(id))block;
+- (NSArray *)transform:(id(^)(id))block;
 - (NSArray *)compact;
 - (NSArray *)concat:(NSArray *)otherArray;
 - (NSInteger)count:(NSInteger(^)(id))block;
 - (NSArray *)flatten;
 
-- (NSDictionary *)toDictionary:(id(^)(id))block;
+- (NSDictionary *)map:(id(^)(id))block;
+
+@end
+
+@interface NSObject (ArrayAdditions)
+
+- (BOOL)in:(NSArray *)array;
 
 @end

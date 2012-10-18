@@ -10,7 +10,7 @@
 
 @implementation NSArray (Additions)
 
-- (NSArray *)map:(id(^)(id))block
+- (NSArray *)transform:(id(^)(id))block
 {
     id resultValues[self.count];
     int count = 0;
@@ -67,13 +67,22 @@
     return result;
 }
 
-- (NSDictionary *)toDictionary:(id(^)(id))block
+- (NSDictionary *)map:(id(^)(id))block
 {
-    NSMutableArray *keys = [NSMutableArray arrayWithCapacity:self.count];
+    NSMutableArray *values = [NSMutableArray arrayWithCapacity:self.count];
     for (id el in self) {
-        [keys addObject:block(el)];
+        [values addObject:block(el) ?: NSNull.null];
     }
-    return [NSDictionary dictionaryWithObjects:self forKeys:keys];
+    return [NSDictionary dictionaryWithObjects:values forKeys:self];
+}
+
+@end
+
+@implementation NSObject (ArrayAdditions)
+
+- (BOOL)in:(NSArray *)array
+{
+    return [array containsObject:self];
 }
 
 @end

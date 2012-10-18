@@ -32,7 +32,7 @@
             } else if ([value isKindOfClass:[NSArray class]]) {
                 Class class = [self trySelector:NSSelectorFromString([NSString stringWithFormat:@"%@Class", key])];
                 if (class && class != [NSArray class]) {
-                    value = [(NSArray *) value map:^id(id obj) {
+                    value = [(NSArray *) value transform:^id(id obj) {
                         return [obj isKindOfClass:[NSDictionary class]]
                             ? [[class alloc] initWithValuesInDictionary:obj]
                             : obj;
@@ -48,13 +48,31 @@
 - (NSDictionary *)asDictionary
 {
     NSArray *properties = [self.class instanceProperties];
-    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithCapacity:properties.count];
-    for (NSString *property in properties) {
+    
+    return [properties map:^id(NSString *property) {
         id value = [self valueForKey:property];
+        //char type = [self.class typeForProperty:property];
         
-        d[property] = value;
-    }
-    return d;
+        if ([value isKindOfClass:NSArray.class]) {
+            return [(NSArray *) value transform:^id(id obj) {
+                return ([value isKindOfClass:NSString.class]
+                        || [value isKindOfClass:NSNumber.class]
+                        || [value isKindOfClass:NSDictionary.class]
+                        || [value isKindOfClass:NSDate.class]
+                        || [value isKindOfClass:NSNull.class])
+                ? obj
+                : [obj asDictionary];
+            }];
+        } else if ([value isKindOfClass:NSString.class]
+                   || [value isKindOfClass:NSNumber.class]
+                   || [value isKindOfClass:NSDictionary.class]
+                   || [value isKindOfClass:NSDate.class]
+                   || [value isKindOfClass:NSNull.class]) {
+            return value;
+        }
+        
+        return [value asDictionary];
+    }];
 }
 
 - (id)trySelector:(SEL)selector
@@ -147,6 +165,27 @@
     NSString *type = [attributes substringWithRange:NSMakeRange(range.location + 3, range.length - 4)];
     
     return NSClassFromString(type);
+}
+
++ (char)typeForProperty:(NSString *)propertyName
+{
+    objc_property_t property = class_getProperty(self, [propertyName cStringUsingEncoding:NSUTF8StringEncoding]);
+    const char *attr = property_getAttributes(property);
+    if (!attr)
+        return 0;
+    
+    NSString *attributes = [NSString stringWithUTF8String:attr];
+    
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"T."
+                                                                           options:0
+                                                                             error:&error];
+    NSRange range = [regex rangeOfFirstMatchInString:attributes options:0 range:NSMakeRange(0, attributes.length)];
+    
+    if (range.location == NSNotFound || range.length < 2)
+        return 0;
+    
+    return [attributes characterAtIndex:range.location + 1];
 }
 
 + (BOOL)hasProperty:(NSString *)propertyName

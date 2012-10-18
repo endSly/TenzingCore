@@ -12,6 +12,8 @@
 
 - (id)initWithValuesInDictionary:(NSDictionary *)dict;
 
+- (NSDictionary *)asDictionary;
+
 - (id)trySelector:(SEL)selector;
 - (id)trySelector:(SEL)selector withObject:(id)obj;
 - (id)trySelector:(SEL)selector withObject:(id)obj0 withObject:(id)obj1;
@@ -22,6 +24,7 @@
 + (NSArray *)instanceMethods;
 + (NSArray *)instanceProperties;
 + (Class)classForProperty:(NSString *)propertyName;
++ (char)typeForProperty:(NSString *)propertyName;
 + (BOOL)hasProperty:(NSString *)propertyName;
 
 @end

@@ -24,12 +24,24 @@
 
 @property NSNumber *aNumber;
 @property TestClass *test;
+@property int value;
+
+@property NSArray *tests;
 
 @end
 
 @implementation TestClass
 
 @synthesize aNumber;
+@synthesize test;
+@synthesize value;
+
+@synthesize tests;
+
+- (Class)testsClass
+{
+    return TestClass.class;
+}
 
 @end
 
@@ -49,8 +61,7 @@
     [super tearDown];
 }
 
-- (void)testMetaProgramming
-{
+- (void)testDynamicMethods {
     [NSString defineMethod:@selector(dynamicStringMultiply:) do:^id(NSString *self, ...) {
         va_list ap;
         va_start(ap, self);
@@ -96,14 +107,26 @@
     STAssertEqualObjects([NSString two], @"Two", @"Dynamic class methods should work");
     STAssertEqualObjects([NSString three], @"Three", @"Dynamic class methods should work");
     
+}
+
+- (void)testObjectInspect
+{
     //STAssertEqualObjects([TestClass instanceProperties], @[@"aNumber", @"test"], @"Properties list should be computed");
     STAssertEqualObjects(NSNumber.class, [TestClass classForProperty:@"aNumber"], @"Class of properties should be computed");
-    
-    TestClass *test = [[TestClass alloc] initWithValuesInDictionary:@{@"aNumber": @5, @"test": @{@"aNumber": @8}}];
+    STAssertFalse([TestClass typeForProperty:@"value"] != 'i', @"Type for property must be detected");
+}
+
+- (void)testObjectDump
+{
+    TestClass *test = [[TestClass alloc] initWithValuesInDictionary:@{@"aNumber": @5, @"test": @{@"aNumber": @8}, @"tests": @[@{@"aNumber": @1}, @{@"aNumber": @2}]}];
     STAssertEqualObjects(@5, test.aNumber, @"Init with key values dictionary should work");
     STAssertEqualObjects(@8, test.test.aNumber, @"Init with key values dictionary should work");
+    STAssertEqualObjects(@2, ((TestClass *) test.tests[1]).aNumber, @"Init with key values dictionary should work");
     
-    
+    NSDictionary *testDict = [test asDictionary];
+    STAssertEqualObjects(@5, testDict[@"aNumber"], @"Object dump to key values dictionary should work");
+    STAssertEqualObjects(@8, testDict[@"test"][@"aNumber"], @"Object dump to key values dictionary should work");
+    STAssertEqualObjects(@2, testDict[@"tests"][1][@"aNumber"], @"Object dump to key values dictionary should work");
 }
 
 @end
