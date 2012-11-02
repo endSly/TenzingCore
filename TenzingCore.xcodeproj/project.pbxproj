@@ -13,6 +13,7 @@
 		0D633820162DF38A006BFA8B /* NSMutableArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */; };
 		0D633823162DF859006BFA8B /* NSNumber+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D633822162DF859006BFA8B /* NSNumber+Additions.m */; };
 		0D633824162DF9A8006BFA8B /* NSNumber+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D633822162DF859006BFA8B /* NSNumber+Additions.m */; };
+		0D9090D4164307A0000D4935 /* NSArray+Tasks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9090D3164307A0000D4935 /* NSArray+Tasks.m */; };
 		0DCE2623162DC7F500649563 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2622162DC7F500649563 /* Foundation.framework */; };
 		0DCE2628162DC7F500649563 /* TenzingCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0DCE2627162DC7F500649563 /* TenzingCore.h */; };
 		0DCE2632162DC7F500649563 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2631162DC7F500649563 /* SenTestingKit.framework */; };
@@ -53,6 +54,8 @@
 		0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Additions.m"; sourceTree = "<group>"; };
 		0D633821162DF859006BFA8B /* NSNumber+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Additions.h"; sourceTree = "<group>"; };
 		0D633822162DF859006BFA8B /* NSNumber+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Additions.m"; sourceTree = "<group>"; };
+		0D9090D2164307A0000D4935 /* NSArray+Tasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Tasks.h"; sourceTree = "<group>"; };
+		0D9090D3164307A0000D4935 /* NSArray+Tasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Tasks.m"; sourceTree = "<group>"; };
 		0DCE261F162DC7F500649563 /* libTenzingCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTenzingCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DCE2622162DC7F500649563 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0DCE2626162DC7F500649563 /* TenzingCore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TenzingCore-Prefix.pch"; sourceTree = "<group>"; };
@@ -93,6 +96,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D6FD5E116303C54002F16E4 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0D63381A162DEAB0006BFA8B /* NSObject+Additions.h */,
+				0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */,
+				0DCE264B162DC88900649563 /* NSArray+Additions.h */,
+				0DCE264C162DC88900649563 /* NSArray+Additions.m */,
+				0D9090D2164307A0000D4935 /* NSArray+Tasks.h */,
+				0D9090D3164307A0000D4935 /* NSArray+Tasks.m */,
+				0DCE264E162DCEFB00649563 /* NSMutableArray+Additions.h */,
+				0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */,
+				0D633821162DF859006BFA8B /* NSNumber+Additions.h */,
+				0D633822162DF859006BFA8B /* NSNumber+Additions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		0D9090D616430B83000D4935 /* REST */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = REST;
+			sourceTree = "<group>";
+		};
 		0DCE2614162DC7F500649563 = {
 			isa = PBXGroup;
 			children = (
@@ -125,16 +152,10 @@
 		0DCE2624162DC7F500649563 /* TenzingCore */ = {
 			isa = PBXGroup;
 			children = (
+				0D9090D616430B83000D4935 /* REST */,
+				0D6FD5E116303C54002F16E4 /* Categories */,
 				0DCE2627162DC7F500649563 /* TenzingCore.h */,
 				0DCE2625162DC7F500649563 /* Supporting Files */,
-				0D63381A162DEAB0006BFA8B /* NSObject+Additions.h */,
-				0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */,
-				0DCE264B162DC88900649563 /* NSArray+Additions.h */,
-				0DCE264C162DC88900649563 /* NSArray+Additions.m */,
-				0DCE264E162DCEFB00649563 /* NSMutableArray+Additions.h */,
-				0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */,
-				0D633821162DF859006BFA8B /* NSNumber+Additions.h */,
-				0D633822162DF859006BFA8B /* NSNumber+Additions.m */,
 			);
 			path = TenzingCore;
 			sourceTree = "<group>";
@@ -268,6 +289,7 @@
 				0DCE2650162DCEFB00649563 /* NSMutableArray+Additions.m in Sources */,
 				0D63381C162DEAB0006BFA8B /* NSObject+Additions.m in Sources */,
 				0D633823162DF859006BFA8B /* NSNumber+Additions.m in Sources */,
+				0D9090D4164307A0000D4935 /* NSArray+Tasks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
