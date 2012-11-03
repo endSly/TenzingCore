@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TZRESTService : NSObject
+@interface TZRESTService : NSObject {
+    BOOL _initialized;
+}
 
-- (void)get:(NSString *)path class:(Class)class as:(NSString *)sel;
-- (void)post:(NSString *)path class:(Class)class as:(NSString *)sel;
-- (void)put:(NSString *)path class:(Class)class as:(NSString *)sel;
-- (void)delete:(NSString *)path class:(Class)class as:(NSString *)sel;
+@property (nonatomic, retain) NSOperationQueue *operationQueue;
+@property (nonatomic, copy) NSURL * baseURL;
+
++ (void)get:(NSString *)path class:(Class)class as:(SEL)sel;
++ (void)post:(NSString *)path class:(Class)class as:(SEL)sel;
++ (void)put:(NSString *)path class:(Class)class as:(SEL)sel;
++ (void)delete:(NSString *)path class:(Class)class as:(SEL)sel;
 
 @end
