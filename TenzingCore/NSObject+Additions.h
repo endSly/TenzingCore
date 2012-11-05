@@ -21,7 +21,21 @@
 + (void)defineMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
 + (void)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
 
+/**
+ Inspects all instance methods for calling class
+ 
+ @return an array of of strings containing all instance methods for calling class
+ 
+ */
 + (NSArray *)instanceMethods;
+
+/**
+ Inspects all instance class for calling class
+ 
+ @return an array of of strings containing all class methods for calling class
+ 
+ */
++ (NSArray *)classMethods;
 + (NSArray *)instanceProperties;
 + (Class)classForProperty:(NSString *)propertyName;
 + (char)typeForProperty:(NSString *)propertyName;

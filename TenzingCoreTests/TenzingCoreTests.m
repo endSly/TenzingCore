@@ -107,6 +107,7 @@
     STAssertEqualObjects([NSString two], @"Two", @"Dynamic class methods should work");
     STAssertEqualObjects([NSString three], @"Three", @"Dynamic class methods should work");
     
+    
 }
 
 - (void)testObjectInspect
@@ -114,6 +115,8 @@
     //STAssertEqualObjects([TestClass instanceProperties], @[@"aNumber", @"test"], @"Properties list should be computed");
     STAssertEqualObjects(NSNumber.class, [TestClass classForProperty:@"aNumber"], @"Class of properties should be computed");
     STAssertFalse([TestClass typeForProperty:@"value"] != 'i', @"Type for property must be detected");
+    
+    STAssertTrue([[NSString classMethods] containsObject:@"randomString"], @"Class methods should be inspected");
 }
 
 - (void)testObjectDump

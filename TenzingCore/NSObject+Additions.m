@@ -131,6 +131,11 @@
     return [NSArray arrayWithObjects:methodsNames count:count];
 }
 
++ (NSArray *)classMethods
+{
+    return [object_getClass(self) instanceMethods];
+}
+
 + (NSArray *)instanceProperties
 {
     unsigned int count;
