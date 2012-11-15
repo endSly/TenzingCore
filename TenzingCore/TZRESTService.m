@@ -32,11 +32,15 @@
     }
     NSMutableString *resultSchema = [schema mutableCopy];
     
-    [regex enumerateMatchesInString:schema options:0 range:NSMakeRange(0, schema.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-        NSString *key = [schema substringWithRange:NSMakeRange(result.range.location + 1, result.range.length - 1)];
-        [resultSchema replaceCharactersInRange:result.range withString:params[key]];
-        //[params removeObjectForKey:key];
-    }];
+    [regex enumerateMatchesInString:schema
+                            options:0
+                              range:NSMakeRange(0, schema.length)
+                         usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                             
+                             NSString *key = [schema substringWithRange:NSMakeRange(result.range.location + 1, result.range.length - 1)];
+                             [resultSchema replaceCharactersInRange:result.range withString:params[key]];
+                             //[params removeObjectForKey:key];
+                         }];
     
     return resultSchema;
 }

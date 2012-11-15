@@ -23,8 +23,11 @@
             
             id value = dict[key];
             
+            if ([value isKindOfClass:NSNull.class]) {
+                value = nil;
+            
             // Encode recursively objects
-            if ([value isKindOfClass:[NSDictionary class]]) {
+            } else if ([value isKindOfClass:[NSDictionary class]]) {
                 Class class = [self.class classForProperty:key];
                 if (class && class != [NSDictionary class]) {
                     value = [[class alloc] initWithValuesInDictionary:value];
@@ -115,7 +118,12 @@
 
 + (void)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation
 {
-    class_addMethod(object_getClass(self.class), selector, imp_implementationWithBlock(implementation), "@@:@");
+    class_addMethod(object_getClass(self), selector, imp_implementationWithBlock(implementation), "@@:@");
+}
+
++ (Class)subclass:(NSString *)className
+{
+    return objc_allocateClassPair(object_getClass(self), [className cStringUsingEncoding:NSUTF8StringEncoding], 0);
 }
 
 + (NSArray *)instanceMethods

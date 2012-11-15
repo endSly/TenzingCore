@@ -21,6 +21,8 @@
 + (void)defineMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
 + (void)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
 
++ (Class)subclass:(NSString *)className;
+
 /**
  Inspects all instance methods for calling class
  

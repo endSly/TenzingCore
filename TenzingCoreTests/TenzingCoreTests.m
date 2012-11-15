@@ -106,8 +106,6 @@
     STAssertEqualObjects([NSString one], @"One", @"Dynamic class methods should work");
     STAssertEqualObjects([NSString two], @"Two", @"Dynamic class methods should work");
     STAssertEqualObjects([NSString three], @"Three", @"Dynamic class methods should work");
-    
-    
 }
 
 - (void)testObjectInspect
