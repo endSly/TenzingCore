@@ -9,6 +9,7 @@
 #import "TZRESTService.h"
 #import "NSObject+Additions.h"
 #import "NSArray+Additions.h"
+#import "NSDictionary+URLHelper.h"
 
 @implementation TZRESTService
 
@@ -17,11 +18,12 @@
     self = [super init];
     if (self) {
         self.operationQueue = [[NSOperationQueue alloc] init];
+        self.delegate = self;
     }
     return self;
 }
 
-+ (NSString *)generatePathFromSchema:(NSString *)schema params:(NSMutableDictionary *)params
++ (NSString *)generatePathFromSchema:(NSString *)schema params:(NSDictionary *)params addQuery:(BOOL)addQuery
 {
     static NSRegularExpression *regex = nil;
     if (!regex) {
@@ -45,24 +47,47 @@
     return resultSchema;
 }
 
-+ (void)routePath:(NSString *)path method:(NSString *)method class:(Class)class as:(SEL)sel
++ (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel
 {
     [self defineMethod:sel do:^id(TZRESTService *_self, ...) {
         va_list ap;
         va_start(ap, _self);
-        id params = va_arg(ap, id);
+        NSDictionary *params = va_arg(ap, id);
         void(^callback)(id, NSURLResponse *, NSError *) = va_arg(ap, id);
+        NSString *path = path_;
         va_end(ap);
         
-        NSString *resultPath = [self generatePathFromSchema:path params:params];
+        if ([_self.delegate respondsToSelector:@selector(RESTService:beforeCreateRequestWithPath:params:callback:)]) {
+            [_self.delegate RESTService:_self
+            beforeCreateRequestWithPath:&path
+                                 params:&params
+                               callback:&callback];
+        }
+        
+        NSString *resultPath = [self generatePathFromSchema:path params:params addQuery:[method isEqualToString:@"GET"]];
         NSURL *url = [NSURL URLWithString:resultPath relativeToURL:_self.baseURL];
         
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         request.HTTPMethod = method;
+        
+        if (![method isEqualToString:@"GET"] && params) {
+            request.HTTPBody = [[params asURLQueryString] dataUsingEncoding:NSUTF8StringEncoding];
+        }
+        
+        if ([_self.delegate respondsToSelector:@selector(RESTService:beforeSendRequest:)]) {
+            [_self.delegate RESTService:_self beforeSendRequest:&request];
+        }
+        
         [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:((TZRESTService *) _self).operationQueue
                                completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
+                                   if ([_self.delegate respondsToSelector:@selector(RESTService:afterResponse:data:error:)]) {
+                                       [_self.delegate RESTService:_self afterResponse:&resp
+                                                              data:&data
+                                                             error:&error];
+                                   }
+                                   
                                    if (error) {
                                        // Conection Error
                                        callback(data, resp, error);

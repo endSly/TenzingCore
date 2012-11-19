@@ -8,10 +8,32 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TZRESTService : NSObject
+@class TZRESTService;
 
-@property (nonatomic, retain) NSOperationQueue *operationQueue;
-@property (nonatomic, copy) NSURL * baseURL;
+@protocol TZRESTServiceDelegate <NSObject>
+
+@optional
+
+- (void)RESTService:(TZRESTService *)service
+beforeCreateRequestWithPath:(NSString **)path
+             params:(NSDictionary **)params
+           callback:(void(^*)(id, NSURLResponse *, NSError *))callback;
+
+- (void)RESTService:(TZRESTService *)service beforeSendRequest:(NSMutableURLRequest **)request;
+
+- (void)RESTService:(TZRESTService *)service
+      afterResponse:(NSURLResponse **)resp
+               data:(NSData **)data
+              error:(NSError **)error;
+
+@end
+
+
+@interface TZRESTService : NSObject <TZRESTServiceDelegate>
+
+@property (nonatomic, retain)   NSOperationQueue * operationQueue;
+@property (nonatomic, copy)     NSURL * baseURL;
+@property (nonatomic, retain)   NSObject <TZRESTServiceDelegate> * delegate;
 
 + (void)get:(NSString *)path    class:(Class)class  as:(SEL)sel;
 + (void)post:(NSString *)path   class:(Class)class  as:(SEL)sel;
@@ -19,3 +41,4 @@
 + (void)delete:(NSString *)path class:(Class)class  as:(SEL)sel;
 
 @end
+

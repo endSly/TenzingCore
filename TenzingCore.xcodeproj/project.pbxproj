@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D3112031655552E00749DDF /* NSDictionary+URLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3112021655552E00749DDF /* NSDictionary+URLHelper.m */; };
 		0D63381C162DEAB0006BFA8B /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */; };
 		0D63381E162DF38A006BFA8B /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */; };
 		0D63381F162DF38A006BFA8B /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264C162DC88900649563 /* NSArray+Additions.m */; };
@@ -51,6 +52,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D3112011655552E00749DDF /* NSDictionary+URLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+URLHelper.h"; sourceTree = "<group>"; };
+		0D3112021655552E00749DDF /* NSDictionary+URLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+URLHelper.m"; sourceTree = "<group>"; };
 		0D63381A162DEAB0006BFA8B /* NSObject+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Additions.h"; sourceTree = "<group>"; };
 		0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Additions.m"; sourceTree = "<group>"; };
 		0D633821162DF859006BFA8B /* NSNumber+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Additions.h"; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 				0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */,
 				0D633821162DF859006BFA8B /* NSNumber+Additions.h */,
 				0D633822162DF859006BFA8B /* NSNumber+Additions.m */,
+				0D3112011655552E00749DDF /* NSDictionary+URLHelper.h */,
+				0D3112021655552E00749DDF /* NSDictionary+URLHelper.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 				0D633823162DF859006BFA8B /* NSNumber+Additions.m in Sources */,
 				0D9090D4164307A0000D4935 /* NSArray+Tasks.m in Sources */,
 				0D9090D91643ED1B000D4935 /* TZRESTService.m in Sources */,
+				0D3112031655552E00749DDF /* NSDictionary+URLHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
