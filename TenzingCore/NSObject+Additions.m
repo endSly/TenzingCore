@@ -13,13 +13,16 @@
 
 @implementation NSObject (Additions)
 
+static int i = 0;
+
 - (id)initWithValuesInDictionary:(NSDictionary *)dict
 {
     self = [self init];
+    i++;
     if (self) {
-        NSLog(@"--- Object: %@", self.class);
+        NSLog(@"%i --- Object: %@", i, self.class);
         for (NSString *key in dict) {
-            NSLog(@"  +-- Key(%@): %@", [self.class hasProperty:key] ? @"true" : @"false", key);
+            NSLog(@"%i  +-- Key(%@): %@", i, [self.class hasProperty:key] ? @"true" : @"false", key);
             
             if (![self.class hasProperty:key])
                 continue;
@@ -48,6 +51,7 @@
             [self setValue:value forKey:key];
         }
     }
+    i--;
     return self;
 }
 
