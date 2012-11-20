@@ -32,6 +32,8 @@
                                                           options:0
                                                             error:&error];
     }
+    NSMutableDictionary *remainingParams = [params mutableCopy];
+    
     NSMutableString *resultSchema = [schema mutableCopy];
     
     [regex enumerateMatchesInString:schema
@@ -40,9 +42,13 @@
                          usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                              
                              NSString *key = [schema substringWithRange:NSMakeRange(result.range.location + 1, result.range.length - 1)];
-                             [resultSchema replaceCharactersInRange:result.range withString:params[key]];
-                             //[params removeObjectForKey:key];
+                             [resultSchema replaceCharactersInRange:result.range withString:remainingParams[key]];
+                             [remainingParams removeObjectForKey:key];
                          }];
+    
+    if (addQuery && remainingParams && remainingParams.count) {
+        [resultSchema appendFormat:@"?%@", [remainingParams asURLQueryString]];
+    }
     
     return resultSchema;
 }
@@ -94,6 +100,7 @@
                                        return;
                                    }
                                    NSError *serializationError;
+                                   
                                    id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&serializationError];
                                    
                                    if (serializationError) {

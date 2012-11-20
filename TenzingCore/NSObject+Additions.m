@@ -17,12 +17,15 @@
 {
     self = [self init];
     if (self) {
+        NSLog(@"--- Object: %@", self.class);
         for (NSString *key in dict) {
+            NSLog(@"  +-- Key(%@): %@", [self.class hasProperty:key] ? @"true" : @"false", key);
+            
             if (![self.class hasProperty:key])
                 continue;
             
-            id value = dict[key];
-            
+            NSObject *value = dict[key];
+
             if ([value isKindOfClass:NSNull.class]) {
                 value = nil;
             
@@ -30,7 +33,7 @@
             } else if ([value isKindOfClass:[NSDictionary class]]) {
                 Class class = [self.class classForProperty:key];
                 if (class && class != [NSDictionary class]) {
-                    value = [[class alloc] initWithValuesInDictionary:value];
+                    value = [[class alloc] initWithValuesInDictionary:(NSDictionary *) value];
                 }
             } else if ([value isKindOfClass:[NSArray class]]) {
                 Class class = [self trySelector:NSSelectorFromString([NSString stringWithFormat:@"%@Class", key])];
