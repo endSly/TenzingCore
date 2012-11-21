@@ -20,35 +20,36 @@ static int i = 0;
     self = [self init];
     i++;
     if (self) {
-        NSLog(@"%i --- Object: %@", i, self.class);
         for (NSString *key in dict) {
-            NSLog(@"%i  +-- Key(%@): %@", i, [self.class hasProperty:key] ? @"true" : @"false", key);
-            
-            if (![self.class hasProperty:key])
-                continue;
-            
-            NSObject *value = dict[key];
 
-            if ([value isKindOfClass:NSNull.class]) {
-                value = nil;
-            
-            // Encode recursively objects
-            } else if ([value isKindOfClass:[NSDictionary class]]) {
-                Class class = [self.class classForProperty:key];
-                if (class && class != [NSDictionary class]) {
-                    value = [[class alloc] initWithValuesInDictionary:(NSDictionary *) value];
-                }
-            } else if ([value isKindOfClass:[NSArray class]]) {
-                Class class = [self trySelector:NSSelectorFromString([NSString stringWithFormat:@"%@Class", key])];
-                if (class && class != [NSArray class]) {
-                    value = [(NSArray *) value transform:^id(id obj) {
-                        return [obj isKindOfClass:[NSDictionary class]]
+            @try {
+                NSObject *value = dict[key];
+                
+                if ([value isKindOfClass:NSNull.class]) {
+                    value = nil;
+                    
+                    // Encode recursively objects
+                } else if ([value isKindOfClass:[NSDictionary class]]) {
+                    Class class = [self.class classForProperty:key];
+                    if (class && class != [NSDictionary class]) {
+                        value = [[class alloc] initWithValuesInDictionary:(NSDictionary *) value];
+                    }
+                } else if ([value isKindOfClass:[NSArray class]]) {
+                    Class class = [self trySelector:NSSelectorFromString([NSString stringWithFormat:@"%@Class", key])];
+                    if (class && class != [NSArray class]) {
+                        value = [(NSArray *) value transform:^id(id obj) {
+                            return [obj isKindOfClass:[NSDictionary class]]
                             ? [[class alloc] initWithValuesInDictionary:obj]
                             : obj;
-                    }];
+                        }];
+                    }
                 }
+                [self setValue:value forKey:key];
             }
-            [self setValue:value forKey:key];
+            @catch (NSException *exception) {
+                // Do nothing
+            }
+            
         }
     }
     i--;
@@ -64,24 +65,25 @@ static int i = 0;
         //char type = [self.class typeForProperty:property];
         
         if ([value isKindOfClass:NSArray.class]) {
-            return [(NSArray *) value transform:^id(id obj) {
-                return ([value isKindOfClass:NSString.class]
-                        || [value isKindOfClass:NSNumber.class]
-                        || [value isKindOfClass:NSDictionary.class]
-                        || [value isKindOfClass:NSDate.class]
-                        || [value isKindOfClass:NSNull.class])
+            value = [(NSArray *) value transform:^id(id obj) {
+                return ([obj isKindOfClass:NSString.class]
+                        || [obj isKindOfClass:NSNumber.class]
+                        || [obj isKindOfClass:NSDictionary.class]
+                        || [obj isKindOfClass:NSDate.class]
+                        || [obj isKindOfClass:NSNull.class])
                 ? obj
                 : [obj asDictionary];
             }];
-        } else if ([value isKindOfClass:NSString.class]
-                   || [value isKindOfClass:NSNumber.class]
-                   || [value isKindOfClass:NSDictionary.class]
-                   || [value isKindOfClass:NSDate.class]
-                   || [value isKindOfClass:NSNull.class]) {
-            return value;
+            
+        } else if (!([value isKindOfClass:NSString.class]
+                     || [value isKindOfClass:NSNumber.class]
+                     || [value isKindOfClass:NSDictionary.class]
+                     || [value isKindOfClass:NSDate.class]
+                     || [value isKindOfClass:NSNull.class])) {
+            
+            value = [value asDictionary];
         }
-        
-        return [value asDictionary];
+        return value;
     }];
 }
 
