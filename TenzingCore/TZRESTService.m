@@ -55,7 +55,9 @@
 
 + (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel
 {
+    NSLog(@"--- %@ %@ With Class: %@", method, path_, class);
     [self defineMethod:sel do:^id(TZRESTService *_self, ...) {
+        NSLog(@"$$$ %@ %@ With Class: %@", method, path_, class);
         va_list ap;
         va_start(ap, _self);
         NSDictionary *params = va_arg(ap, id);
