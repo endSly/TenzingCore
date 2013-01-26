@@ -42,7 +42,7 @@
                          usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
                              
                              NSString *key = [schema substringWithRange:NSMakeRange(result.range.location + 1, result.range.length - 1)];
-                             [resultSchema replaceCharactersInRange:result.range withString:remainingParams[key]];
+                             [resultSchema replaceCharactersInRange:result.range withString:remainingParams[key] ?: @""];
                              [remainingParams removeObjectForKey:key];
                          }];
     
@@ -55,9 +55,7 @@
 
 + (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel
 {
-    NSLog(@"--- %@ %@ With Class: %@", method, path_, class);
     [self defineMethod:sel do:^id(TZRESTService *_self, ...) {
-        NSLog(@"$$$ %@ %@ With Class: %@", method, path_, class);
         va_list ap;
         va_start(ap, _self);
         NSDictionary *params = va_arg(ap, id);
@@ -88,7 +86,7 @@
         
         [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
         [NSURLConnection sendAsynchronousRequest:request
-                                           queue:((TZRESTService *) _self).operationQueue
+                                           queue:_self.operationQueue
                                completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
                                    if ([_self.delegate respondsToSelector:@selector(RESTService:afterResponse:data:error:)]) {
                                        [_self.delegate RESTService:_self afterResponse:&resp
@@ -122,8 +120,10 @@
                                            ? [[class alloc] initWithValuesInDictionary:obj]
                                            : obj;
                                        }], resp, nil);
+                                       
                                    } else if ([object isKindOfClass:NSDictionary.class]) {
                                        callback([[class alloc] initWithValuesInDictionary:object], resp, nil);
+                                       
                                    } else {
                                        callback(object, resp, nil);
                                    }

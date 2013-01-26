@@ -8,8 +8,7 @@
 
 #import "TenzingCoreTests.h"
 
-#import "NSObject+Additions.h"
-#import "NSNumber+Additions.h"
+#import <TenzingCore/TenzingCore.h>
 
 @interface NSString (Dynamic)
 - (NSString *)dynamicStringMultiply:(NSNumber*)count;

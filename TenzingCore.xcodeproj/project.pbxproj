@@ -7,16 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D3112031655552E00749DDF /* NSDictionary+URLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3112021655552E00749DDF /* NSDictionary+URLHelper.m */; };
-		0D63381C162DEAB0006BFA8B /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */; };
+		0D2666DB16835096000B905C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2622162DC7F500649563 /* Foundation.framework */; };
+		0D2666E7168350B0000B905C /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */; };
+		0D2666E8168350B0000B905C /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264C162DC88900649563 /* NSArray+Additions.m */; };
+		0D2666E9168350B0000B905C /* NSArray+Tasks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9090D3164307A0000D4935 /* NSArray+Tasks.m */; };
+		0D2666EA168350B0000B905C /* NSMutableArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */; };
+		0D2666EB168350B0000B905C /* NSNumber+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D633822162DF859006BFA8B /* NSNumber+Additions.m */; };
+		0D2666EC168350B0000B905C /* NSDictionary+URLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3112021655552E00749DDF /* NSDictionary+URLHelper.m */; };
+		0D2666ED168350B0000B905C /* NSDictionary+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E7BB61665583300580514 /* NSDictionary+Additions.m */; };
+		0D2666EE168350F1000B905C /* TZRESTService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9090D81643ED1B000D4935 /* TZRESTService.m */; };
 		0D63381E162DF38A006BFA8B /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */; };
 		0D63381F162DF38A006BFA8B /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264C162DC88900649563 /* NSArray+Additions.m */; };
 		0D633820162DF38A006BFA8B /* NSMutableArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */; };
-		0D633823162DF859006BFA8B /* NSNumber+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D633822162DF859006BFA8B /* NSNumber+Additions.m */; };
 		0D633824162DF9A8006BFA8B /* NSNumber+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D633822162DF859006BFA8B /* NSNumber+Additions.m */; };
-		0D9090D4164307A0000D4935 /* NSArray+Tasks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9090D3164307A0000D4935 /* NSArray+Tasks.m */; };
-		0D9090D91643ED1B000D4935 /* TZRESTService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9090D81643ED1B000D4935 /* TZRESTService.m */; };
-		0D9E7BB71665583300580514 /* NSDictionary+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E7BB61665583300580514 /* NSDictionary+Additions.m */; };
 		0DCE2623162DC7F500649563 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2622162DC7F500649563 /* Foundation.framework */; };
 		0DCE2628162DC7F500649563 /* TenzingCore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0DCE2627162DC7F500649563 /* TenzingCore.h */; };
 		0DCE2632162DC7F500649563 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE2631162DC7F500649563 /* SenTestingKit.framework */; };
@@ -25,11 +28,23 @@
 		0DCE2638162DC7F500649563 /* libTenzingCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE261F162DC7F500649563 /* libTenzingCore.a */; };
 		0DCE263E162DC7F500649563 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DCE263C162DC7F500649563 /* InfoPlist.strings */; };
 		0DCE2641162DC7F500649563 /* TenzingCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2640162DC7F500649563 /* TenzingCoreTests.m */; };
-		0DCE264D162DC88900649563 /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264C162DC88900649563 /* NSArray+Additions.m */; };
-		0DCE2650162DCEFB00649563 /* NSMutableArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0D2666EF168350FB000B905C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0DCE2616162DC7F500649563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0DCE261E162DC7F500649563;
+			remoteInfo = TenzingCore;
+		};
+		0D2666F1168352D5000B905C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0DCE2616162DC7F500649563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D2666D916835096000B905C;
+			remoteInfo = "TenzingCore-RESTService";
+		};
 		0DCE2636162DC7F500649563 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0DCE2616162DC7F500649563 /* Project object */;
@@ -40,6 +55,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0D2666D816835096000B905C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0DCE261D162DC7F500649563 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -53,6 +77,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D2666DA16835096000B905C /* libTenzingCore-RESTService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTenzingCore-RESTService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D2666DE16835096000B905C /* TenzingCore-RESTService-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TenzingCore-RESTService-Prefix.pch"; sourceTree = "<group>"; };
 		0D3112011655552E00749DDF /* NSDictionary+URLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+URLHelper.h"; sourceTree = "<group>"; };
 		0D3112021655552E00749DDF /* NSDictionary+URLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+URLHelper.m"; sourceTree = "<group>"; };
 		0D63381A162DEAB0006BFA8B /* NSObject+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Additions.h"; sourceTree = "<group>"; };
@@ -61,8 +87,8 @@
 		0D633822162DF859006BFA8B /* NSNumber+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Additions.m"; sourceTree = "<group>"; };
 		0D9090D2164307A0000D4935 /* NSArray+Tasks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Tasks.h"; sourceTree = "<group>"; };
 		0D9090D3164307A0000D4935 /* NSArray+Tasks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Tasks.m"; sourceTree = "<group>"; };
-		0D9090D71643ED1B000D4935 /* TZRESTService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZRESTService.h; sourceTree = "<group>"; };
-		0D9090D81643ED1B000D4935 /* TZRESTService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZRESTService.m; sourceTree = "<group>"; };
+		0D9090D71643ED1B000D4935 /* TZRESTService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TZRESTService.h; path = ../TenzingCore/TZRESTService.h; sourceTree = "<group>"; };
+		0D9090D81643ED1B000D4935 /* TZRESTService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TZRESTService.m; path = ../TenzingCore/TZRESTService.m; sourceTree = "<group>"; };
 		0D9E7BB51665583300580514 /* NSDictionary+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Additions.h"; sourceTree = "<group>"; };
 		0D9E7BB61665583300580514 /* NSDictionary+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Additions.m"; sourceTree = "<group>"; };
 		0DCE261F162DC7F500649563 /* libTenzingCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTenzingCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +109,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0D2666D716835096000B905C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D2666DB16835096000B905C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0DCE261C162DC7F500649563 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -105,6 +139,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D2666DC16835096000B905C /* TenzingCore-RESTService */ = {
+			isa = PBXGroup;
+			children = (
+				0D9090D71643ED1B000D4935 /* TZRESTService.h */,
+				0D9090D81643ED1B000D4935 /* TZRESTService.m */,
+				0D2666DD16835096000B905C /* Supporting Files */,
+			);
+			path = "TenzingCore-RESTService";
+			sourceTree = SOURCE_ROOT;
+		};
+		0D2666DD16835096000B905C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0D2666DE16835096000B905C /* TenzingCore-RESTService-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		0D6FD5E116303C54002F16E4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,19 +178,11 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		0D9090D616430B83000D4935 /* REST */ = {
-			isa = PBXGroup;
-			children = (
-				0D9090D71643ED1B000D4935 /* TZRESTService.h */,
-				0D9090D81643ED1B000D4935 /* TZRESTService.m */,
-			);
-			name = REST;
-			sourceTree = "<group>";
-		};
 		0DCE2614162DC7F500649563 = {
 			isa = PBXGroup;
 			children = (
 				0DCE2624162DC7F500649563 /* TenzingCore */,
+				0D2666DC16835096000B905C /* TenzingCore-RESTService */,
 				0DCE2639162DC7F500649563 /* TenzingCoreTests */,
 				0DCE2621162DC7F500649563 /* Frameworks */,
 				0DCE2620162DC7F500649563 /* Products */,
@@ -150,6 +194,7 @@
 			children = (
 				0DCE261F162DC7F500649563 /* libTenzingCore.a */,
 				0DCE2630162DC7F500649563 /* TenzingCoreTests.octest */,
+				0D2666DA16835096000B905C /* libTenzingCore-RESTService.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,7 +212,6 @@
 		0DCE2624162DC7F500649563 /* TenzingCore */ = {
 			isa = PBXGroup;
 			children = (
-				0D9090D616430B83000D4935 /* REST */,
 				0D6FD5E116303C54002F16E4 /* Categories */,
 				0DCE2627162DC7F500649563 /* TenzingCore.h */,
 				0DCE2625162DC7F500649563 /* Supporting Files */,
@@ -205,6 +249,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0D2666D916835096000B905C /* TenzingCore-RESTService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0D2666E516835096000B905C /* Build configuration list for PBXNativeTarget "TenzingCore-RESTService" */;
+			buildPhases = (
+				0D2666D616835096000B905C /* Sources */,
+				0D2666D716835096000B905C /* Frameworks */,
+				0D2666D816835096000B905C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D2666F0168350FB000B905C /* PBXTargetDependency */,
+			);
+			name = "TenzingCore-RESTService";
+			productName = "TenzingCore-RESTService";
+			productReference = 0D2666DA16835096000B905C /* libTenzingCore-RESTService.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		0DCE261E162DC7F500649563 /* TenzingCore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0DCE2644162DC7F500649563 /* Build configuration list for PBXNativeTarget "TenzingCore" */;
@@ -234,6 +296,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0D2666F2168352D5000B905C /* PBXTargetDependency */,
 				0DCE2637162DC7F500649563 /* PBXTargetDependency */,
 			);
 			name = TenzingCoreTests;
@@ -263,6 +326,7 @@
 			projectRoot = "";
 			targets = (
 				0DCE261E162DC7F500649563 /* TenzingCore */,
+				0D2666D916835096000B905C /* TenzingCore-RESTService */,
 				0DCE262F162DC7F500649563 /* TenzingCoreTests */,
 			);
 		};
@@ -296,18 +360,25 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0D2666D616835096000B905C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D2666EE168350F1000B905C /* TZRESTService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0DCE261B162DC7F500649563 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DCE264D162DC88900649563 /* NSArray+Additions.m in Sources */,
-				0DCE2650162DCEFB00649563 /* NSMutableArray+Additions.m in Sources */,
-				0D63381C162DEAB0006BFA8B /* NSObject+Additions.m in Sources */,
-				0D633823162DF859006BFA8B /* NSNumber+Additions.m in Sources */,
-				0D9090D4164307A0000D4935 /* NSArray+Tasks.m in Sources */,
-				0D9090D91643ED1B000D4935 /* TZRESTService.m in Sources */,
-				0D3112031655552E00749DDF /* NSDictionary+URLHelper.m in Sources */,
-				0D9E7BB71665583300580514 /* NSDictionary+Additions.m in Sources */,
+				0D2666E7168350B0000B905C /* NSObject+Additions.m in Sources */,
+				0D2666E8168350B0000B905C /* NSArray+Additions.m in Sources */,
+				0D2666E9168350B0000B905C /* NSArray+Tasks.m in Sources */,
+				0D2666EA168350B0000B905C /* NSMutableArray+Additions.m in Sources */,
+				0D2666EB168350B0000B905C /* NSNumber+Additions.m in Sources */,
+				0D2666EC168350B0000B905C /* NSDictionary+URLHelper.m in Sources */,
+				0D2666ED168350B0000B905C /* NSDictionary+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +397,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0D2666F0168350FB000B905C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0DCE261E162DC7F500649563 /* TenzingCore */;
+			targetProxy = 0D2666EF168350FB000B905C /* PBXContainerItemProxy */;
+		};
+		0D2666F2168352D5000B905C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D2666D916835096000B905C /* TenzingCore-RESTService */;
+			targetProxy = 0D2666F1168352D5000B905C /* PBXContainerItemProxy */;
+		};
 		0DCE2637162DC7F500649563 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0DCE261E162DC7F500649563 /* TenzingCore */;
@@ -345,6 +426,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0D2666E316835096000B905C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TenzingCore_RESTService.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenzingCore-RESTService/TenzingCore-RESTService-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0D2666E416835096000B905C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/TenzingCore_RESTService.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TenzingCore-RESTService/TenzingCore-RESTService-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		0DCE2642162DC7F500649563 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -449,6 +554,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0D2666E516835096000B905C /* Build configuration list for PBXNativeTarget "TenzingCore-RESTService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0D2666E316835096000B905C /* Debug */,
+				0D2666E416835096000B905C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		0DCE2619162DC7F500649563 /* Build configuration list for PBXProject "TenzingCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

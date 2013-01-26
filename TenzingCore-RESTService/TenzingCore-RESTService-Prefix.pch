@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'TenzingCore-RESTService' target in the 'TenzingCore-RESTService' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

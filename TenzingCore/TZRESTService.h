@@ -10,15 +10,31 @@
 
 @class TZRESTService;
 
+/*!
+ * REST Service Delegate includes some hooks for altering behavior of REST Request
+ */
+
 @protocol TZRESTServiceDelegate <NSObject>
 
 @optional
 
+/*!
+ * Called before creating URL request. You can use this function to change de resultant NSURLRequest.
+ *  @param service self service.
+ *  @param path Pointer to path string (Pointer to pointer).
+ *  @param params Pointer to dictionary with params (Pointer to pointer). You can challenge dictionary's pointer to alter params
+ *  @param callback Pointer to callback function (Pointer to pointer).
+ */
 - (void)RESTService:(TZRESTService *)service
 beforeCreateRequestWithPath:(NSString **)path
              params:(NSDictionary **)params
            callback:(void(^*)(id, NSURLResponse *, NSError *))callback;
 
+/*!
+ * Called before send NSURLRequest.
+ *  @param service self service.
+ *  @param request pointer to NSMutableURLRequest
+ */
 - (void)RESTService:(TZRESTService *)service beforeSendRequest:(NSMutableURLRequest **)request;
 
 - (void)RESTService:(TZRESTService *)service
@@ -28,13 +44,28 @@ beforeCreateRequestWithPath:(NSString **)path
 
 @end
 
-
+/*!
+ * TZRESTService is an abstract class that represents any REST service. You must inherit  it for mapping
+ * a concrete REST Service.
+ * This class is NOT a singleton so yo can map one service and assign multiple URLs for it.
+ */
 @interface TZRESTService : NSObject <TZRESTServiceDelegate>
 
+/*! Operation Queue for url requests */
 @property (nonatomic, retain)   NSOperationQueue * operationQueue;
+/*! Base URL for service */
 @property (nonatomic, copy)     NSURL * baseURL;
+/*! Delegate for this service */
 @property (nonatomic, retain)   NSObject <TZRESTServiceDelegate> * delegate;
 
+/*!
+ * This function map REST function at indicated path in a Objective function in this class.
+ * It will generate a new method for class with given selector.
+ * This will map GET method.
+ *  @param path Path that will be loaded
+ *  @param class Class that should be used to map result
+ *  @param sel Selector for method
+ */
 + (void)get:(NSString *)path    class:(Class)class  as:(SEL)sel;
 + (void)post:(NSString *)path   class:(Class)class  as:(SEL)sel;
 + (void)put:(NSString *)path    class:(Class)class  as:(SEL)sel;
