@@ -11,6 +11,17 @@
 #import "NSArray+Additions.h"
 #import "NSDictionary+URLHelper.h"
 
+@interface TZRESTService (PrivateMethods)
+
++ (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel;
++ (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel multipart:(BOOL)isMultipart;
+
+- (NSMutableURLRequest *)buildRequestWithParams:(NSDictionary *)params path:(NSString *)path method:(NSString *)method multipart:(BOOL)isMultipart;
+- (NSData *)multipartDataForRequest:(NSMutableURLRequest *)request params:(NSDictionary *)params;
+- (NSString *)generatePathFromSchema:(NSString *)schema params:(NSDictionary *)params addQuery:(BOOL)addQuery;
+
+@end
+
 @implementation TZRESTService
 
 - (id)init
@@ -23,7 +34,7 @@
     return self;
 }
 
-+ (NSString *)generatePathFromSchema:(NSString *)schema params:(NSDictionary *)params addQuery:(BOOL)addQuery
+- (NSString *)generatePathFromSchema:(NSString *)schema params:(NSDictionary *)params addQuery:(BOOL)addQuery
 {
     static NSRegularExpression *regex = nil;
     if (!regex) {
@@ -53,7 +64,63 @@
     return resultSchema;
 }
 
+- (NSData *)multipartDataForRequest:(NSMutableURLRequest *)request params:(NSDictionary *)params
+{
+    NSMutableData *body = [NSMutableData data];
+
+    NSString *boundary = [NSString stringWithFormat:@"---------------------------%@", [[NSProcessInfo processInfo] globallyUniqueString]];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+    
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    NSData *separator = [[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    for (NSString *key in params) {
+        [body appendData:separator];
+        
+        id value = params[key];
+    
+        [body appendData:[@"Content-Disposition: form-data; " dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"name: \"%@\"", key] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        if ([value isKindOfClass:[NSData class]]) {
+            [body appendData:value];
+        } else {
+            [body appendData:[NSString stringWithFormat:@"%@", value]];
+        }
+    }
+    
+    [body appendData:separator];
+    
+    return body;
+}
+
+- (NSMutableURLRequest *)buildRequestWithParams:(NSDictionary *)params path:(NSString *)path method:(NSString *)method multipart:(BOOL)isMultipart
+{
+    NSString *resultPath = [self generatePathFromSchema:path params:params addQuery:![method isEqualToString:@"POST"]];
+    NSURL *url = [NSURL URLWithString:resultPath relativeToURL:self.baseURL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = method;
+    
+    if ([method isEqualToString:@"POST"] && params) {
+        request.HTTPBody = isMultipart
+        ? [self multipartDataForRequest:request params:params]
+        : [[params asURLQueryString] dataUsingEncoding:NSUTF8StringEncoding];
+    }
+    
+    [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
+    
+    return request;
+}
+
 + (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel
+{
+    [self routePath:path_ method:method class:class as:sel multipart:false];
+}
+
++ (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel multipart:(BOOL)isMultipart
 {
     [self defineMethod:sel do:^id(TZRESTService *_self, ...) {
         va_list ap;
@@ -70,21 +137,12 @@
                                callback:&callback];
         }
         
-        NSString *resultPath = [self generatePathFromSchema:path params:params addQuery:[method isEqualToString:@"GET"]];
-        NSURL *url = [NSURL URLWithString:resultPath relativeToURL:_self.baseURL];
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        request.HTTPMethod = method;
-        
-        if (![method isEqualToString:@"GET"] && params) {
-            request.HTTPBody = [[params asURLQueryString] dataUsingEncoding:NSUTF8StringEncoding];
-        }
+        NSMutableURLRequest *request = [_self buildRequestWithParams:params path:path method:method multipart:isMultipart];
         
         if ([_self.delegate respondsToSelector:@selector(RESTService:beforeSendRequest:)]) {
             [_self.delegate RESTService:_self beforeSendRequest:&request];
         }
         
-        [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:_self.operationQueue
                                completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
@@ -96,7 +154,8 @@
                                    
                                    if (error) {
                                        // Conection Error
-                                       callback(data, resp, error);
+                                       id parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                       callback(parsedData ?: data, resp, error);
                                        return;
                                    }
                                    NSError *serializationError;
@@ -140,6 +199,11 @@
 + (void)post:(NSString *)path class:(Class)class as:(SEL)sel
 {
     [self routePath:path method:@"POST" class:class as:sel];
+}
+
++ (void)post:(NSString *)path class:(Class)class as:(SEL)sel multipart:(BOOL)multipart
+{
+    [self routePath:path method:@"POST" class:class as:sel multipart:multipart];
 }
 
 + (void)put:(NSString *)path class:(Class)class as:(SEL)sel

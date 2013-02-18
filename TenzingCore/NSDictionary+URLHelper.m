@@ -14,9 +14,22 @@
 
 - (NSString *)asURLQueryString
 {
+    return [self asURLQueryStringForObjectName:nil];
+}
+
+- (NSString *)asURLQueryStringForObjectName:(NSString *)objName
+{
     NSMutableArray *components = [NSMutableArray arrayWithCapacity:self.count];
     for (id key in self) {
-        NSString *part = [NSString stringWithFormat: @"%@=%@", URL_ENCODED(key), URL_ENCODED(self[key])];
+        id value = self[key];
+        NSString *part;
+        id keyStr = objName ? [NSString stringWithFormat: @"%@[%@]", objName, key] : key;
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            part = [(NSDictionary *) value asURLQueryStringForObjectName:keyStr];
+        } else {
+            part = [NSString stringWithFormat: @"%@=%@", URL_ENCODED(keyStr), URL_ENCODED(value)];
+        }
+        
         [components addObject: part];
     }
     return [components componentsJoinedByString: @"&"];

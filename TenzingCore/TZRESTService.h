@@ -68,6 +68,7 @@ beforeCreateRequestWithPath:(NSString **)path
  */
 + (void)get:(NSString *)path    class:(Class)class  as:(SEL)sel;
 + (void)post:(NSString *)path   class:(Class)class  as:(SEL)sel;
++ (void)post:(NSString *)path   class:(Class)class  as:(SEL)sel multipart:(BOOL)multipart;
 + (void)put:(NSString *)path    class:(Class)class  as:(SEL)sel;
 + (void)delete:(NSString *)path class:(Class)class  as:(SEL)sel;
 
