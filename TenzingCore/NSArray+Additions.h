@@ -10,6 +10,8 @@
 
 @interface NSArray (Additions)
 
+- (NSString *)join:(NSString *)separator;
+
 - (NSArray *)transform:(id(^)(id))block;
 - (NSArray *)compact;
 - (NSArray *)concat:(NSArray *)otherArray;

@@ -10,6 +10,19 @@
 
 @implementation NSArray (Additions)
 
+- (NSString *)join:(NSString *)separator
+{
+    NSMutableString *result = nil;
+    for (id val in self) {
+        if (result) {
+            [result appendFormat:@"%@%@", separator, val];
+        } else {
+            result = [NSMutableString stringWithFormat:@"%@", val];
+        }
+    }
+    return result ?: @"";
+}
+
 - (NSArray *)transform:(id(^)(id))block
 {
     id resultValues[self.count];
@@ -61,7 +74,7 @@
         if ([el isKindOfClass:[NSArray class]]) {
             [result addObjectsFromArray:((NSArray *)el).flatten];
         } else {
-            [result addObject:result];
+            [result addObject:el];
         }
     }
     return result;

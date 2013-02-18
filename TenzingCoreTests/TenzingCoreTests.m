@@ -129,4 +129,18 @@
     STAssertEqualObjects(@2, testDict[@"tests"][1][@"aNumber"], @"Object dump to key values dictionary should work");
 }
 
+- (void)testArrayAdditions
+{
+    NSArray *arr = @[@[@"zero"], @1, @2, @[@3, @[@4]], @5, @[@[@[@[@6, @7, @8]]]]];
+    NSArray *flatArr = [arr flatten];
+    
+    STAssertEqualObjects(@"zero", flatArr[0],@"Flatten should work");
+    STAssertEqualObjects(@1, flatArr[1],@"Flatten should work");
+    STAssertEqualObjects(@4, flatArr[4],@"Flatten should work");
+    STAssertEqualObjects(@5, flatArr[5],@"Flatten should work");
+    STAssertEqualObjects(@7, flatArr[7],@"Flatten should work");
+    STAssertTrue(flatArr.count == 9, @"Flatten should mantain items count");
+    
+}
+
 @end
