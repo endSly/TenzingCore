@@ -169,6 +169,8 @@ static int i = 0;
 + (Class)classForProperty:(NSString *)propertyName
 {
     objc_property_t property = class_getProperty(self, [propertyName cStringUsingEncoding:NSUTF8StringEncoding]);
+    if (!property)
+        return nil;
     const char *attr = property_getAttributes(property);
     if (!attr)
         return nil;
