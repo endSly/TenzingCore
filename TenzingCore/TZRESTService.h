@@ -37,10 +37,30 @@ beforeCreateRequestWithPath:(NSString **)path
  */
 - (void)RESTService:(TZRESTService *)service beforeSendRequest:(NSMutableURLRequest **)request;
 
+/*!
+ * Called when response is received from service.
+ *  @param service self service.
+ *  @param resp pointer to NSURLResponse
+ *  @param data pointer to received data
+ *  @param error pointer to error
+ */
 - (void)RESTService:(TZRESTService *)service
       afterResponse:(NSURLResponse **)resp
                data:(NSData **)data
               error:(NSError **)error;
+
+
+/* Methods for multipart uploads */
+
+/*!
+ *  @return NSString containg filename of a given file key
+ */
+- (NSString *)RESTService:(TZRESTService *)service filenameForKey:(id)key;
+
+/*!
+ *  @return NSString containg mimetype of a given file key
+ */
+- (NSString *)RESTService:(TZRESTService *)service mimetypeForKey:(id)key;
 
 @end
 

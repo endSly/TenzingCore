@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define $(sel) (@selector(sel))
+
 @interface NSObject (Additions)
 
 - (id)initWithValuesInDictionary:(NSDictionary *)dict;

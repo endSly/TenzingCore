@@ -80,8 +80,17 @@
         
         id value = params[key];
     
-        [body appendData:[@"Content-Disposition: form-data; " dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"name: \"%@\"", key] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Disposition: form-data" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"; name: \"%@\"", key] dataUsingEncoding:NSUTF8StringEncoding]];
+        NSString *filename = [self.delegate trySelector:$(RESTService:filenameForKey:) withObject:self withObject:key];
+        if (filename) 
+            [body appendData:[[NSString stringWithFormat:@"; filename: \"%@\"", filename] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSString *mimetype = [self.delegate trySelector:$(RESTService:mimetypeForKey:) withObject:self withObject:key];
+        if (mimetype) 
+            [body appendData:[[NSString stringWithFormat:@"\r\nContent-Type: %@", filename] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        
         [body appendData:[@"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         
         if ([value isKindOfClass:[NSData class]]) {
