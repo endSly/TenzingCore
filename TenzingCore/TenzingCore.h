@@ -9,6 +9,7 @@
 #import "NSObject+Additions.h"
 #import "NSArray+Additions.h"
 #import "NSDictionary+Additions.h"
+#import "NSDictionary+URLHelper.h"
 #import "NSArray+Tasks.h"
 #import "NSMutableArray+Additions.h"
 #import "NSNumber+Additions.h"

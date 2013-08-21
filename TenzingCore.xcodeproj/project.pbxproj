@@ -28,6 +28,7 @@
 		0DCE2638162DC7F500649563 /* libTenzingCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCE261F162DC7F500649563 /* libTenzingCore.a */; };
 		0DCE263E162DC7F500649563 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DCE263C162DC7F500649563 /* InfoPlist.strings */; };
 		0DCE2641162DC7F500649563 /* TenzingCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE2640162DC7F500649563 /* TenzingCoreTests.m */; };
+		0DE1EF2017C4D55100BD02FC /* NSDictionary+URLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3112021655552E00749DDF /* NSDictionary+URLHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -390,6 +391,7 @@
 				0D63381E162DF38A006BFA8B /* NSObject+Additions.m in Sources */,
 				0D63381F162DF38A006BFA8B /* NSArray+Additions.m in Sources */,
 				0D633820162DF38A006BFA8B /* NSMutableArray+Additions.m in Sources */,
+				0DE1EF2017C4D55100BD02FC /* NSDictionary+URLHelper.m in Sources */,
 				0DCE2641162DC7F500649563 /* TenzingCoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,6 +563,7 @@
 				0D2666E416835096000B905C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0DCE2619162DC7F500649563 /* Build configuration list for PBXProject "TenzingCore" */ = {
 			isa = XCConfigurationList;

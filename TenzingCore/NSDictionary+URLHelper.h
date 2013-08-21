@@ -17,4 +17,10 @@
  */
 - (NSString *)asURLQueryString;
 
+/**
+ * Parses string to with querystring to dictionary
+ * @return Dictionary with query
+ */
++ (instancetype)dictionaryWithQueryString:(NSString *)queryString;
+
 @end

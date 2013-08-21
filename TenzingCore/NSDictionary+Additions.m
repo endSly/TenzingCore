@@ -27,7 +27,7 @@
     
     return (NSDictionary *) result;
 }
-- (NSDictionary *) dictionaryByMergingWith: (NSDictionary *) dict
+- (NSDictionary *)dictionaryByMergingWith:(NSDictionary *)dict
 {
     return [NSDictionary dictionaryByMerging:self with:dict];
 }

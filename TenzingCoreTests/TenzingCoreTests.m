@@ -143,4 +143,16 @@
     
 }
 
+- (void)testDictionaryAdditions
+{
+    // string=with spaces&object[nested]=value&2nd object[nested][first]=a&2nd object[nested][second]=b&2nd object[nested][object][name]=ok
+    NSDictionary *dictionary = [NSDictionary dictionaryWithQueryString:@"string=with%20spaces&object%5Bnested%5D=value&2nd%20object%5Bnested%5D%5Bfirst%5D=a&2nd%20object%5Bnested%5D%5Bsecond%5D=b&2nd%20object%5Bnested%5D%5Bobject%5D%5Bname%5D=ok"];
+    
+    STAssertEqualObjects(dictionary[@"string"], @"with spaces", @"DictionaryWithQueryString should parse");
+    STAssertEqualObjects(dictionary[@"object"][@"nested"], @"value", @"DictionaryWithQueryString should parse nested objects");
+    STAssertEqualObjects(dictionary[@"2nd object"][@"nested"][@"first"], @"a", @"DictionaryWithQueryString should parse nested objects");
+    STAssertEqualObjects(dictionary[@"2nd object"][@"nested"][@"second"], @"b", @"DictionaryWithQueryString should parse nested objects");
+    STAssertEqualObjects(dictionary[@"2nd object"][@"nested"][@"object"][@"name"], @"ok", @"DictionaryWithQueryString should parse nested objects");
+}
+
 @end
