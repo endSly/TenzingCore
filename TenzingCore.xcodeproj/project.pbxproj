@@ -16,6 +16,9 @@
 		0D2666EC168350B0000B905C /* NSDictionary+URLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3112021655552E00749DDF /* NSDictionary+URLHelper.m */; };
 		0D2666ED168350B0000B905C /* NSDictionary+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E7BB61665583300580514 /* NSDictionary+Additions.m */; };
 		0D2666EE168350F1000B905C /* TZRESTService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9090D81643ED1B000D4935 /* TZRESTService.m */; };
+		0D32958B1832B97A00BE6D8C /* NSObject+AdditionsNoARC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCC9C0F182F9B5E0057C35F /* NSObject+AdditionsNoARC.m */; };
+		0D32958C1832B97D00BE6D8C /* NSArray+Tasks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9090D3164307A0000D4935 /* NSArray+Tasks.m */; };
+		0D32958D1832B98000BE6D8C /* NSDictionary+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E7BB61665583300580514 /* NSDictionary+Additions.m */; };
 		0D63381E162DF38A006BFA8B /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D63381B162DEAB0006BFA8B /* NSObject+Additions.m */; };
 		0D63381F162DF38A006BFA8B /* NSArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264C162DC88900649563 /* NSArray+Additions.m */; };
 		0D633820162DF38A006BFA8B /* NSMutableArray+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCE264F162DCEFB00649563 /* NSMutableArray+Additions.m */; };
@@ -391,6 +394,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D32958D1832B98000BE6D8C /* NSDictionary+Additions.m in Sources */,
+				0D32958C1832B97D00BE6D8C /* NSArray+Tasks.m in Sources */,
+				0D32958B1832B97A00BE6D8C /* NSObject+AdditionsNoARC.m in Sources */,
 				0D633824162DF9A8006BFA8B /* NSNumber+Additions.m in Sources */,
 				0D63381E162DF38A006BFA8B /* NSObject+Additions.m in Sources */,
 				0D63381F162DF38A006BFA8B /* NSArray+Additions.m in Sources */,

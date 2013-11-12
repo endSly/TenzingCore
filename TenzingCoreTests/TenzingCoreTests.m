@@ -62,11 +62,26 @@
 
 - (void)testDynamicSubclassing
 {
-    Class newClass = [NSObject subclass:@"TestDynamicClass" config:^(Class newClass) {
-        [newClass defineMethod:$(doTheTest) do:^id(id _self, ...) {
-            NSLog(@"Ok!");
+    Class TestDynamicClass = [NSObject subclass:@"TestDynamicClass" config:^(Class TestDynamicClass) {
+        [TestDynamicClass defineMethod:$(init) do:^id(id _self, ...) {
+            return _self;
+        }];
+        
+        [TestDynamicClass defineMethod:$(doTheTest) do:^id(id _self, ...) {
+            va_list ap;
+            va_start(ap, _self);
+            NSString *msg = va_arg(ap, id);
+            va_end(ap);
+            
+            STAssertEqualObjects(msg, @"DynamicClassMessage", @"Messages to dynamic classes should work");
+            
+            return @"DynamicClassMessageResult";
         }];
     }];
+    
+    id obj = [[TestDynamicClass alloc] init];
+    id result = [obj trySelector:$(doTheTest) withObject:@"DynamicClassMessage"];
+    STAssertEqualObjects(result, @"DynamicClassMessageResult", @"Messages to dynamic classes should work");
 }
 
 - (void)testDynamicMethods {

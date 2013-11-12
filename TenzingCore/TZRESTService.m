@@ -48,7 +48,7 @@
     NSMutableString *resultSchema = [schema mutableCopy];
     
     while (YES) {
-        NSRange *range = [regex rangeOfFirstMatchInString:resultSchema options:0 range:NSMakeRange(0, resultSchema.length)];
+        NSRange range = [regex rangeOfFirstMatchInString:resultSchema options:0 range:NSMakeRange(0, resultSchema.length)];
         if (NSEqualRanges(range, NSMakeRange(NSNotFound, 0))) break;
         
         NSString *key = [resultSchema substringWithRange:NSMakeRange(range.location + 1, range.length - 1)];
