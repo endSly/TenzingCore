@@ -47,16 +47,15 @@
     
     NSMutableString *resultSchema = [schema mutableCopy];
     
-    [regex enumerateMatchesInString:schema
-                            options:0
-                              range:NSMakeRange(0, schema.length)
-                         usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-                             
-                             NSString *key = [schema substringWithRange:NSMakeRange(result.range.location + 1, result.range.length - 1)];
-                             [resultSchema replaceCharactersInRange:result.range withString:remainingParams[key] ?: @""];
-                             [remainingParams removeObjectForKey:key];
-                         }];
-    
+    while (YES) {
+        NSRange *range = [regex rangeOfFirstMatchInString:resultSchema options:0 range:NSMakeRange(0, resultSchema.length)];
+        if (NSEqualRanges(range, NSMakeRange(NSNotFound, 0))) break;
+        
+        NSString *key = [resultSchema substringWithRange:NSMakeRange(range.location + 1, range.length - 1)];
+        [resultSchema replaceCharactersInRange:range withString:remainingParams[key] ?: @""];
+        [remainingParams removeObjectForKey:key];
+    }
+
     if (addQuery && remainingParams && remainingParams.count) {
         [resultSchema appendFormat:@"?%@", [remainingParams asURLQueryString]];
     }
