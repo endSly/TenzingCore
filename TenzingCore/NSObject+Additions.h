@@ -20,10 +20,16 @@
 - (id)trySelector:(SEL)selector withObject:(id)obj;
 - (id)trySelector:(SEL)selector withObject:(id)obj0 withObject:(id)obj1;
 
-+ (void)defineMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
-+ (void)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
++ (BOOL)defineMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
++ (BOOL)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
 
-+ (Class)subclass:(NSString *)className;
+/**
+ Adds instance variable for a given class
+ 
+ E.g.: [Class addInstanceVariable:@"rect" size:sizeof(Rectangle) type:@encode(Rectangle)];
+ 
+ */
++ (BOOL)addInstanceVariable:(NSString *)name size:(NSUInteger)size type:(char *)type;
 
 /**
  Inspects all instance methods for calling class
@@ -44,5 +50,11 @@
 + (Class)classForProperty:(NSString *)propertyName;
 + (char)typeForProperty:(NSString *)propertyName;
 + (BOOL)hasProperty:(NSString *)propertyName;
+
+@end
+
+@interface NSObject (AdditionsNoARC)
+
++ (Class)subclass:(NSString *)className config:(void(^)(Class))configBlock;
 
 @end

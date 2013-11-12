@@ -120,19 +120,19 @@ static int i = 0;
     return nil;
 }
 
-+ (void)defineMethod:(SEL)selector do:(id(^)(id _self, ...))implementation
++ (BOOL)defineMethod:(SEL)selector do:(id(^)(id _self, ...))implementation
 {
-    class_addMethod(self, selector, imp_implementationWithBlock(implementation), "@@:@");
+    return class_addMethod(self, selector, imp_implementationWithBlock(implementation), "@@:@");
 }
 
-+ (void)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation
++ (BOOL)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation
 {
-    class_addMethod(object_getClass(self), selector, imp_implementationWithBlock(implementation), "@@:@");
+    return class_addMethod(object_getClass(self), selector, imp_implementationWithBlock(implementation), "@@:@");
 }
 
-+ (Class)subclass:(NSString *)className
++ (BOOL)addInstanceVariable:(NSString *)name size:(NSUInteger)size type:(char *)type
 {
-    return objc_allocateClassPair(object_getClass(self), [className cStringUsingEncoding:NSUTF8StringEncoding], 0);
+    return class_addIvar(self, [name cStringUsingEncoding:NSUTF8StringEncoding], size, 1 << size, type);
 }
 
 + (NSArray *)instanceMethods

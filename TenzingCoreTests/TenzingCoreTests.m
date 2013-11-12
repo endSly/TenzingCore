@@ -60,6 +60,15 @@
     [super tearDown];
 }
 
+- (void)testDynamicSubclassing
+{
+    Class newClass = [NSObject subclass:@"TestDynamicClass" config:^(Class newClass) {
+        [newClass defineMethod:$(doTheTest) do:^id(id _self, ...) {
+            NSLog(@"Ok!");
+        }];
+    }];
+}
+
 - (void)testDynamicMethods {
     [NSString defineMethod:@selector(dynamicStringMultiply:) do:^id(NSString *self, ...) {
         va_list ap;
