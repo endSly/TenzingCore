@@ -30,7 +30,7 @@ typedef void(^TZRESTCallback)(id, NSHTTPURLResponse *, NSError *);
 - (void)RESTService:(TZRESTService *)service
 beforeCreateRequestWithPath:(NSString **)path
              params:(NSDictionary **)params
-           callback:(TZRESTCallback)callback;
+           callback:(TZRESTCallback *)callback;
 
 /*!
  * Called before send NSURLRequest.

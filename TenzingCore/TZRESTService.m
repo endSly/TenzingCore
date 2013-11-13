@@ -95,7 +95,7 @@
         if ([value isKindOfClass:[NSData class]]) {
             [body appendData:value];
         } else {
-            [body appendData:[NSString stringWithFormat:@"%@", value]];
+            [body appendData:[[NSString stringWithFormat:@"%@", value] dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
     
