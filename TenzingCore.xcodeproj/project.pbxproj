@@ -82,6 +82,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D07DC7118338EC900CCE04B /* TenzingCore-RESTService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TenzingCore-RESTService.h"; sourceTree = "<group>"; };
 		0D2666DA16835096000B905C /* libTenzingCore-RESTService.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTenzingCore-RESTService.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D2666DE16835096000B905C /* TenzingCore-RESTService-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TenzingCore-RESTService-Prefix.pch"; sourceTree = "<group>"; };
 		0D3112011655552E00749DDF /* NSDictionary+URLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+URLHelper.h"; sourceTree = "<group>"; };
@@ -148,6 +149,7 @@
 		0D2666DC16835096000B905C /* TenzingCore-RESTService */ = {
 			isa = PBXGroup;
 			children = (
+				0D07DC7118338EC900CCE04B /* TenzingCore-RESTService.h */,
 				0D9090D71643ED1B000D4935 /* TZRESTService.h */,
 				0D9090D81643ED1B000D4935 /* TZRESTService.m */,
 				0D2666DD16835096000B905C /* Supporting Files */,
@@ -518,6 +520,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -530,6 +533,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

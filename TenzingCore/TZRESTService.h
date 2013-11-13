@@ -10,6 +10,8 @@
 
 @class TZRESTService;
 
+typedef void(^TZRESTCallback)(id, NSHTTPURLResponse *, NSError *);
+
 /*!
  * REST Service Delegate includes some hooks for altering behavior of REST Request
  */
@@ -28,7 +30,7 @@
 - (void)RESTService:(TZRESTService *)service
 beforeCreateRequestWithPath:(NSString **)path
              params:(NSDictionary **)params
-           callback:(void(^*)(id, NSURLResponse *, NSError *))callback;
+           callback:(TZRESTCallback)callback;
 
 /*!
  * Called before send NSURLRequest.
