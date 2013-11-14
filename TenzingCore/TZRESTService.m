@@ -162,7 +162,9 @@
                                    
                                    if (error) {
                                        // Conection Error
-                                       id parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                       id parsedData = nil;
+                                       if (data)
+                                           parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                        callback(parsedData ?: data, resp, error);
                                        return;
                                    }
