@@ -12,13 +12,16 @@
 
 - (NSString *)join:(NSString *)separator;
 
-- (NSArray *)transform:(id(^)(id))block;
-- (NSArray *)compact;
-- (NSArray *)concat:(NSArray *)otherArray;
+- (instancetype)map:(id(^)(id))block;
+- (instancetype)compact;
+- (instancetype)concat:(NSArray *)otherArray;
 - (NSInteger)count:(NSInteger(^)(id))block;
-- (NSArray *)flatten;
+- (instancetype)flatten;
 
-- (NSDictionary *)map:(id(^)(id))block;
+- (instancetype)filter:(BOOL(^)(id))block;
+
+- (NSDictionary *)dictionaryWithKey:(id(^)(id))block;
+- (NSDictionary *)groupBy:(id(^)(id))block;
 
 @end
 

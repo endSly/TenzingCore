@@ -23,7 +23,7 @@
     return result ?: @"";
 }
 
-- (NSArray *)transform:(id(^)(id))block
+- (NSArray *)map:(id(^)(id))block
 {
     id resultValues[self.count];
     int count = 0;
@@ -80,13 +80,38 @@
     return result;
 }
 
-- (NSDictionary *)map:(id(^)(id))block
+- (NSArray *)filter:(BOOL(^)(id))block
 {
-    NSMutableArray *values = [NSMutableArray arrayWithCapacity:self.count];
+    NSMutableArray *result = [NSMutableArray array];
     for (id el in self) {
-        [values addObject:block(el) ?: NSNull.null];
+        if (block(el)) {
+            [result addObject:el];
+        }
     }
-    return [NSDictionary dictionaryWithObjects:values forKeys:self];
+    return result;
+}
+
+- (NSDictionary *)dictionaryWithKey:(id(^)(id))block
+{
+    NSMutableArray *keys = [NSMutableArray arrayWithCapacity:self.count];
+    for (id el in self) {
+        [keys addObject:block(el) ?: NSNull.null];
+    }
+    return [NSDictionary dictionaryWithObjects:self forKeys:keys];
+}
+
+- (NSDictionary *)groupBy:(id(^)(id))block
+{
+    NSMutableDictionary *result = [[NSMutableDictionary alloc]init];
+    for (id el in self) {
+        id key = block(el);
+        
+        NSMutableArray *items = result[key];
+        if (!items) items = result[key] = [NSMutableArray array];
+        [items addObject:el];
+        
+    }
+    return result;
 }
 
 @end

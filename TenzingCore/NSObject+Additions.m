@@ -37,7 +37,7 @@ static int i = 0;
                 } else if ([value isKindOfClass:[NSArray class]]) {
                     Class class = [self trySelector:NSSelectorFromString([NSString stringWithFormat:@"%@Class", key])];
                     if (class && class != [NSArray class]) {
-                        value = [(NSArray *) value transform:^id(id obj) {
+                        value = [(NSArray *) value map:^id(id obj) {
                             return [obj isKindOfClass:[NSDictionary class]]
                             ? [[class alloc] initWithValuesInDictionary:obj]
                             : obj;
@@ -60,12 +60,12 @@ static int i = 0;
 {
     NSArray *properties = [self.class instanceProperties];
     
-    return [properties map:^id(NSString *property) {
+    return [properties dictionaryWithKey:^id(NSString *property) {
         id value = [self valueForKey:property];
         //char type = [self.class typeForProperty:property];
         
         if ([value isKindOfClass:NSArray.class]) {
-            value = [(NSArray *) value transform:^id(id obj) {
+            value = [(NSArray *) value map:^id(id obj) {
                 return ([obj isKindOfClass:NSString.class]
                         || [obj isKindOfClass:NSNumber.class]
                         || [obj isKindOfClass:NSDictionary.class]

@@ -77,7 +77,7 @@ beforeCreateRequestWithPath:(NSString **)path
 @property (nonatomic, retain)   NSOperationQueue * operationQueue;
 /*! Base URL for service */
 @property (nonatomic, copy)     NSURL * baseURL;
-/*! Delegate for this service */
+/*! Delegate for this service. By default delegate is self */
 @property (nonatomic, retain)   NSObject <TZRESTServiceDelegate> * delegate;
 
 /*!

@@ -182,7 +182,7 @@
                                    }
                                    
                                    if ([object isKindOfClass:NSArray.class]) {
-                                       callback([((NSArray *) object) transform:^id(id obj) {
+                                       callback([((NSArray *) object) map:^id(id obj) {
                                            return [obj isKindOfClass:NSDictionary.class]
                                            ? [[class alloc] initWithValuesInDictionary:obj]
                                            : obj;
