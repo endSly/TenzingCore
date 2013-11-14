@@ -28,7 +28,7 @@
 {
     self = [super init];
     if (self) {
-        self.operationQueue = [[NSOperationQueue alloc] init];
+        self.operationQueue = [NSOperationQueue mainQueue];
         self.delegate = self;
     }
     return self;
@@ -134,10 +134,10 @@
         va_list ap;
         va_start(ap, _self);
         NSDictionary *params = va_arg(ap, id);
-        void(^callback)(id, NSURLResponse *, NSError *) = va_arg(ap, id);
+        TZRESTCallback callback = va_arg(ap, id);
         NSString *path = path_;
         va_end(ap);
-        
+
         if ([_self.delegate respondsToSelector:@selector(RESTService:beforeCreateRequestWithPath:params:callback:)]) {
             [_self.delegate RESTService:_self
             beforeCreateRequestWithPath:&path
@@ -151,52 +151,56 @@
             [_self.delegate RESTService:_self beforeSendRequest:&request];
         }
         
+        void (^completionHandler)(NSURLResponse *, NSData *, NSError *) = ^(NSURLResponse *resp, NSData *data, NSError *error) {
+            
+            if ([_self.delegate respondsToSelector:@selector(RESTService:afterResponse:data:error:)]) {
+                [_self.delegate RESTService:_self afterResponse:&resp
+                                       data:&data
+                                      error:&error];
+            }
+            
+            if (error) {
+                // Conection Error
+                id parsedData = nil;
+                if (data)
+                    parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                callback(parsedData ?: data, resp, error);
+                return;
+            }
+            NSError *serializationError;
+            
+            id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&serializationError];
+            
+            if (serializationError) {
+                // Serialization error
+                callback(data, resp, serializationError);
+                return;
+            }
+            if (!class) {
+                // Object can't be mapped
+                callback(object, resp, nil);
+                return;
+            }
+            
+            if ([object isKindOfClass:NSArray.class]) {
+                callback([((NSArray *) object) map:^id(id obj) {
+                    return [obj isKindOfClass:NSDictionary.class]
+                    ? [[class alloc] initWithValuesInDictionary:obj]
+                    : obj;
+                }], resp, nil);
+                
+            } else if ([object isKindOfClass:NSDictionary.class]) {
+                callback([[class alloc] initWithValuesInDictionary:object], resp, nil);
+                
+            } else {
+                callback(object, resp, nil);
+            }
+        };
+        
+        // Send request
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:_self.operationQueue
-                               completionHandler:^(NSURLResponse *resp, NSData *data, NSError *error) {
-                                   if ([_self.delegate respondsToSelector:@selector(RESTService:afterResponse:data:error:)]) {
-                                       [_self.delegate RESTService:_self afterResponse:&resp
-                                                              data:&data
-                                                             error:&error];
-                                   }
-                                   
-                                   if (error) {
-                                       // Conection Error
-                                       id parsedData = nil;
-                                       if (data)
-                                           parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                                       callback(parsedData ?: data, resp, error);
-                                       return;
-                                   }
-                                   NSError *serializationError;
-                                   
-                                   id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&serializationError];
-                                   
-                                   if (serializationError) {
-                                       // Serialization error
-                                       callback(data, resp, serializationError);
-                                       return;
-                                   }
-                                   if (!class) {
-                                       // Object can't be mapped
-                                       callback(object, resp, nil);
-                                       return;
-                                   }
-                                   
-                                   if ([object isKindOfClass:NSArray.class]) {
-                                       callback([((NSArray *) object) map:^id(id obj) {
-                                           return [obj isKindOfClass:NSDictionary.class]
-                                           ? [[class alloc] initWithValuesInDictionary:obj]
-                                           : obj;
-                                       }], resp, nil);
-                                       
-                                   } else if ([object isKindOfClass:NSDictionary.class]) {
-                                       callback([[class alloc] initWithValuesInDictionary:object], resp, nil);
-                                       
-                                   } else {
-                                       callback(object, resp, nil);
-                                   }
-                               }];
+                               completionHandler:completionHandler];
         return nil;
     }];
 }
