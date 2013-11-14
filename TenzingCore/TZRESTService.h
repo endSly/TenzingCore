@@ -87,7 +87,8 @@ NS_ENUM(NSInteger, TZRESTServiceCachePolicy){
 - (void)RESTService:(TZRESTService *)service
     saveResultCache:(NSData *)data
             request:(NSURLRequest *)request
-           response:(NSURLResponse *)response;
+           response:(NSURLResponse *)response
+         expiration:(NSTimeInterval)expiration;
 
 @end
 
@@ -116,7 +117,7 @@ NS_ENUM(NSInteger, TZRESTServiceCachePolicy){
  *  @param sel Selector for method
  */
 + (void)get:(NSString *)path    class:(Class)class  as:(SEL)sel;
-+ (void)get:(NSString *)path    class:(Class)class  as:(SEL)sel cachePolicy:(NSInteger)cachePolicy;
++ (void)get:(NSString *)path    class:(Class)class  as:(SEL)sel cachePolicy:(NSInteger)cachePolicy expiration:(NSTimeInterval)expiration;
 + (void)post:(NSString *)path   class:(Class)class  as:(SEL)sel;
 + (void)post:(NSString *)path   class:(Class)class  as:(SEL)sel multipart:(BOOL)multipart;
 + (void)put:(NSString *)path    class:(Class)class  as:(SEL)sel;

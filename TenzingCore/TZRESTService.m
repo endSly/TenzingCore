@@ -14,7 +14,9 @@
 @interface TZRESTService (PrivateMethods)
 
 + (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel;
-+ (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel multipart:(BOOL)isMultipart;
++ (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel multipart:(BOOL)isMultipart cachePolicy:(NSInteger)cachePolicy;
+
++ (id)mapData:(NSData *)data inClass:(Class)class error:(NSError **)error;
 
 - (NSMutableURLRequest *)buildRequestWithParams:(NSDictionary *)params path:(NSString *)path method:(NSString *)method multipart:(BOOL)isMultipart;
 - (NSData *)multipartDataForRequest:(NSMutableURLRequest *)request params:(NSDictionary *)params;
@@ -125,10 +127,16 @@
 
 + (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel
 {
-    [self routePath:path_ method:method class:class as:sel multipart:false];
+    [self routePath:path_ method:method class:class as:sel multipart:NO cachePolicy:TZCachePolicyDefault expiration:0];
 }
 
-+ (void)routePath:(NSString *)path_ method:(NSString *)method class:(Class)class as:(SEL)sel multipart:(BOOL)isMultipart
++ (void)routePath:(NSString *)path_
+           method:(NSString *)method
+            class:(Class)class
+               as:(SEL)sel
+        multipart:(BOOL)isMultipart
+      cachePolicy:(NSInteger)cachePolicy
+       expiration:(NSTimeInterval)expiration
 {
     [self defineMethod:sel do:^id(TZRESTService *_self, ...) {
         va_list ap;
@@ -147,60 +155,50 @@
         
         NSMutableURLRequest *request = [_self buildRequestWithParams:params path:path method:method multipart:isMultipart];
         
-        if ([_self.delegate respondsToSelector:@selector(RESTService:beforeSendRequest:)]) {
-            [_self.delegate RESTService:_self beforeSendRequest:&request];
+        BOOL shouldLoadCache, performRequestIfNoCache, shouldPerformRequest;
+        switch (cachePolicy) {
+            case TZCachePolicyRevalidate:
+                shouldLoadCache = YES, performRequestIfNoCache = YES, shouldPerformRequest = YES;
+                break;
+            case TZCachePolicyCacheIfAvailable:
+                shouldLoadCache = YES, performRequestIfNoCache = YES, shouldPerformRequest = NO;
+                break;
+            case TZCachePolicyCacheOnly:
+                shouldLoadCache = YES, performRequestIfNoCache = NO, shouldPerformRequest = NO;
+                break;
+            case TZCachePolicyBypassCache:
+                shouldLoadCache = NO, performRequestIfNoCache = NO, shouldPerformRequest = YES;
+                break;
         }
         
-        void (^completionHandler)(NSURLResponse *, NSData *, NSError *) = ^(NSURLResponse *resp, NSData *data, NSError *error) {
-            
-            if ([_self.delegate respondsToSelector:@selector(RESTService:afterResponse:data:error:)]) {
-                [_self.delegate RESTService:_self afterResponse:&resp
-                                       data:&data
-                                      error:&error];
-            }
-            
-            if (error) {
-                // Conection Error
-                id parsedData = nil;
-                if (data)
-                    parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                callback(parsedData ?: data, resp, error);
-                return;
-            }
-            NSError *serializationError;
-            
-            id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&serializationError];
-            
-            if (serializationError) {
-                // Serialization error
-                callback(data, resp, serializationError);
-                return;
-            }
-            if (!class) {
-                // Object can't be mapped
-                callback(object, resp, nil);
-                return;
-            }
-            
-            if ([object isKindOfClass:NSArray.class]) {
-                callback([((NSArray *) object) map:^id(id obj) {
-                    return [obj isKindOfClass:NSDictionary.class]
-                    ? [[class alloc] initWithValuesInDictionary:obj]
-                    : obj;
-                }], resp, nil);
-                
-            } else if ([object isKindOfClass:NSDictionary.class]) {
-                callback([[class alloc] initWithValuesInDictionary:object], resp, nil);
-                
-            } else {
-                callback(object, resp, nil);
-            }
-        };
+        id cachedResult;
+        if (shouldLoadCache && [_self.cacheStore respondsToSelector:@selector(RESTService:cachedResultForRequest:)]) {
+            NSData *data = [_self.cacheStore RESTService:_self cachedResultForRequest:request];
+            cachedResult = [TZRESTService mapData:data inClass:class error:nil];
+            callback(cachedResult, nil, nil);
+        }
         
-        // Send request
-        [NSURLConnection sendAsynchronousRequest:request
-                                           queue:_self.operationQueue
-                               completionHandler:completionHandler];
+        if (shouldPerformRequest || (performRequestIfNoCache && !cachedResult)) {
+            if ([_self.delegate respondsToSelector:@selector(RESTService:beforeSendRequest:)]) {
+                [_self.delegate RESTService:_self beforeSendRequest:&request];
+            }
+            
+            [NSURLConnection sendAsynchronousRequest:request queue:_self.operationQueue completionHandler:
+             ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                 if ([_self.delegate respondsToSelector:@selector(RESTService:afterResponse:data:error:)]) {
+                     [_self.delegate RESTService:_self afterResponse:&response data:&data error:&connectionError];
+                 }
+                 
+                 if (shouldLoadCache && [_self.cacheStore respondsToSelector:@selector(RESTService:saveResultCache:request:response:expiration:)]) {
+                     [_self.cacheStore RESTService:_self saveResultCache:data request:request response:response expiration:expiration];
+                 }
+                 
+                 NSError *mappingError;
+                 id result = [TZRESTService mapData:data inClass:class error:&mappingError];
+                 callback(result, response, connectionError ?: mappingError);
+             }];
+        }
+        
         return nil;
     }];
 }
@@ -210,6 +208,11 @@
     [self routePath:path method:@"GET" class:class as:sel];
 }
 
++ (void)get:(NSString *)path    class:(Class)class  as:(SEL)sel cachePolicy:(NSInteger)cachePolicy expiration:(NSTimeInterval)expiration
+{
+    [self routePath:path method:@"GET" class:class as:sel multipart:NO cachePolicy:cachePolicy expiration:expiration];
+}
+
 + (void)post:(NSString *)path class:(Class)class as:(SEL)sel
 {
     [self routePath:path method:@"POST" class:class as:sel];
@@ -217,7 +220,7 @@
 
 + (void)post:(NSString *)path class:(Class)class as:(SEL)sel multipart:(BOOL)multipart
 {
-    [self routePath:path method:@"POST" class:class as:sel multipart:multipart];
+    [self routePath:path method:@"POST" class:class as:sel multipart:multipart cachePolicy:TZCachePolicyDefault];
 }
 
 + (void)put:(NSString *)path class:(Class)class as:(SEL)sel
@@ -228,6 +231,39 @@
 + (void)delete:(NSString *)path class:(Class)class as:(SEL)sel
 {
     [self routePath:path method:@"DELETE" class:class as:sel];
+}
+
++ (id)mapData:(NSData *)data inClass:(Class)class error:(NSError **)error
+{
+    if (!data)
+        return nil;
+    
+    NSError *serializationError;
+    
+    id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&serializationError];
+    if (serializationError) {
+        // Serialization error
+        *error = serializationError;
+        return data;
+    }
+    
+    if (!class || [class isSubclassOfClass:NSDictionary.class]) {
+        // No mapping class provided
+        return object;
+    }
+    
+    if ([object isKindOfClass:NSArray.class]) {
+        return [((NSArray *) object) map:^id(id obj) {
+            return [obj isKindOfClass:NSDictionary.class]
+            ? [[class alloc] initWithValuesInDictionary:obj]
+            : obj;
+        }];
+        
+    } else if ([object isKindOfClass:NSDictionary.class]) {
+        return [[class alloc] initWithValuesInDictionary:object];
+        
+    }
+    return object;
 }
 
 @end
