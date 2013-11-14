@@ -91,6 +91,15 @@
     return result;
 }
 
+- (id)find:(BOOL(^)(id))block
+{
+    for (id el in self) {
+        if (block(el))
+            return el;
+    }
+    return nil;
+}
+
 - (NSDictionary *)dictionaryWithKey:(id(^)(id))block
 {
     NSMutableArray *keys = [NSMutableArray arrayWithCapacity:self.count];

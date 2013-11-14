@@ -19,6 +19,7 @@
 - (instancetype)flatten;
 
 - (instancetype)filter:(BOOL(^)(id))block;
+- (id)find:(BOOL(^)(id))block;
 
 - (NSDictionary *)dictionaryWithKey:(id(^)(id))block;
 - (NSDictionary *)groupBy:(id(^)(id))block;
