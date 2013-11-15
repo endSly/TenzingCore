@@ -172,10 +172,13 @@
         }
         
         id cachedResult;
+        NSData *cachedData;
         if (shouldLoadCache && [_self.cacheStore respondsToSelector:@selector(RESTService:cachedResultForRequest:)]) {
-            NSData *data = [_self.cacheStore RESTService:_self cachedResultForRequest:request];
-            cachedResult = [TZRESTService mapData:data inClass:class error:nil];
-            callback(cachedResult, nil, nil);
+            cachedData = [_self.cacheStore RESTService:_self cachedResultForRequest:request];
+            if (cachedData) {
+                cachedResult = [TZRESTService mapData:cachedData inClass:class error:nil];
+                callback(cachedResult, nil, nil);
+            }
         }
         
         if (shouldPerformRequest || (performRequestIfNoCache && !cachedResult)) {
@@ -191,6 +194,11 @@
                  
                  if (shouldLoadCache && [_self.cacheStore respondsToSelector:@selector(RESTService:saveResultCache:request:response:expiration:)]) {
                      [_self.cacheStore RESTService:_self saveResultCache:data request:request response:response expiration:expiration];
+                 }
+                 
+                 if (cachedData && cachedData.hash == data.hash) {
+                     // Same data as cached. Do not call callback
+                     return;
                  }
                  
                  NSError *mappingError;
