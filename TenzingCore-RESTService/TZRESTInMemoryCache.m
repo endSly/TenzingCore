@@ -21,15 +21,16 @@
 
 - (NSData *)RESTService:(TZRESTService *)service cachedResultForRequest:(NSURLRequest *)request
 {
-    return _cache[request.URL];
+    return _cache[request.URL][@"data"];
 }
 
 - (void)RESTService:(TZRESTService *)service
     saveResultCache:(NSData *)data
             request:(NSURLRequest *)request
            response:(NSURLResponse *)response
+         expiration:(NSTimeInterval)expiration
 {
-    _cache[request.URL] = data;
+    _cache[request.URL] = @{@"data": data, @"expiration": [NSDate dateWithTimeIntervalSinceNow:expiration]};
 }
 
 @end
