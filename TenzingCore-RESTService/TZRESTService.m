@@ -192,7 +192,10 @@
                      [_self.delegate RESTService:_self afterResponse:&response data:&data error:&connectionError];
                  }
                  
-                 if (shouldLoadCache && [_self.cacheStore respondsToSelector:@selector(RESTService:saveResultCache:request:response:expiration:)]) {
+                 if (!connectionError
+                     && data
+                     && shouldLoadCache
+                     && [_self.cacheStore respondsToSelector:@selector(RESTService:saveResultCache:request:response:expiration:)]) {
                      [_self.cacheStore RESTService:_self saveResultCache:data request:request response:response expiration:expiration];
                  }
                  
