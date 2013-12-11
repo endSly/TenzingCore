@@ -46,7 +46,7 @@ static void asyncSerialLauncher(NSMutableArray *remaining, dispatch_queue_t queu
 
 - (BOOL)whilst
 {
-    
+    return NO;
 }
 
 - (void)asyncWhilst:(void(^)(BOOL))callback queue:(dispatch_queue_t)queue
