@@ -10,6 +10,8 @@
 
 @class TZRESTService;
 
+typedef void(^TZRESTCallback)(id, NSURLResponse *, NSError *);
+
 /*!
  * REST Service Delegate includes some hooks for altering behavior of REST Request
  */
@@ -28,7 +30,7 @@
 - (void)RESTService:(TZRESTService *)service
 beforeCreateRequestWithPath:(NSString **)path
              params:(NSDictionary **)params
-           callback:(void(^*)(id, NSURLResponse *, NSError *))callback;
+           callback:(TZRESTCallback *)callback;
 
 /*!
  * Called before send NSURLRequest.
@@ -64,6 +66,32 @@ beforeCreateRequestWithPath:(NSString **)path
 
 @end
 
+NS_ENUM(NSInteger, TZRESTServiceCachePolicy){
+    TZCachePolicyDefault            = 0,
+    TZCachePolicyBypassCache        = 0,    /* Do not use cache. */
+    TZCachePolicyCacheIfAvailable   = 1,    /* Default behaviour. Uses cache if available avoiding http request. */
+    TZCachePolicyRevalidate         = 2,    /* Uses cache if available and perform the request. If result has changed calls callback again. */
+    TZCachePolicyCacheOnly          = -1,   /* Only ask to cache */
+};
+
+@protocol TZRESTServiceCacheStore <NSObject>
+
+/*!
+ *  @return Cached result of request
+ */
+- (NSData *)RESTService:(TZRESTService *)service cachedResultForRequest:(NSURLRequest *)request;
+
+/*!
+ *  Stores result of HTTP request
+ */
+- (void)RESTService:(TZRESTService *)service
+    saveResultCache:(NSData *)data
+            request:(NSURLRequest *)request
+           response:(NSURLResponse *)response
+         expiration:(NSTimeInterval)expiration;
+
+@end
+
 /*!
  * TZRESTService is an abstract class that represents any REST service. You must inherit  it for mapping
  * a concrete REST Service.
@@ -75,8 +103,10 @@ beforeCreateRequestWithPath:(NSString **)path
 @property (nonatomic, retain)   NSOperationQueue * operationQueue;
 /*! Base URL for service */
 @property (nonatomic, copy)     NSURL * baseURL;
-/*! Delegate for this service */
+/*! Delegate for this service. By default delegate is self */
 @property (nonatomic, retain)   NSObject <TZRESTServiceDelegate> * delegate;
+/*! Cache Store delegate */
+@property (nonatomic, retain)   NSObject <TZRESTServiceCacheStore> * cacheStore;
 
 /*!
  * This function map REST function at indicated path in a Objective function in this class.
@@ -87,6 +117,7 @@ beforeCreateRequestWithPath:(NSString **)path
  *  @param sel Selector for method
  */
 + (void)get:(NSString *)path    class:(Class)class  as:(SEL)sel;
++ (void)get:(NSString *)path    class:(Class)class  as:(SEL)sel cachePolicy:(NSInteger)cachePolicy expiration:(NSTimeInterval)expiration;
 + (void)post:(NSString *)path   class:(Class)class  as:(SEL)sel;
 + (void)post:(NSString *)path   class:(Class)class  as:(SEL)sel multipart:(BOOL)multipart;
 + (void)put:(NSString *)path    class:(Class)class  as:(SEL)sel;
