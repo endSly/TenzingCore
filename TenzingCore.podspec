@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TenzingCore"
-  s.version      = "0.2.0"
+  s.version      = "0.2.1"
   s.summary      = "Some utilities for iOS."
 
   s.description  = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { "Endika Gutiérrez Salas" => "me@endika.net" }
   s.platform     = :ios
-  s.source       = { :git => "https://github.com/endSly/TenzingCore.git", :tag => "0.2.0", :submodules => true }
+  s.source       = { :git => "https://github.com/endSly/TenzingCore.git", :tag => s.version.to_s, :submodules => true }
   s.header_dir   = 'TenzingCore'
   s.requires_arc = true
   
