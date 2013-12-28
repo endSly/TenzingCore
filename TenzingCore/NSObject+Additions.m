@@ -120,14 +120,14 @@ static int i = 0;
     return nil;
 }
 
-+ (BOOL)defineMethod:(SEL)selector do:(id(^)(id _self, ...))implementation
++ (BOOL)defineMethod:(SEL)selector do:(id)block
 {
-    return class_addMethod(self, selector, imp_implementationWithBlock(implementation), "@@:@");
+    return class_addMethod(self, selector, imp_implementationWithBlock(block), "@@:@");
 }
 
-+ (BOOL)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation
++ (BOOL)defineClassMethod:(SEL)selector do:(id)block
 {
-    return class_addMethod(object_getClass(self), selector, imp_implementationWithBlock(implementation), "@@:@");
+    return class_addMethod(object_getClass(self), selector, imp_implementationWithBlock(block), "@@:@");
 }
 
 + (BOOL)addInstanceVariable:(NSString *)name size:(NSUInteger)size type:(char *)type

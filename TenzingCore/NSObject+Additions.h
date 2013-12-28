@@ -20,8 +20,8 @@
 - (id)trySelector:(SEL)selector withObject:(id)obj;
 - (id)trySelector:(SEL)selector withObject:(id)obj0 withObject:(id)obj1;
 
-+ (BOOL)defineMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
-+ (BOOL)defineClassMethod:(SEL)selector do:(id(^)(id _self, ...))implementation;
++ (BOOL)defineMethod:(SEL)selector do:(id)block;
++ (BOOL)defineClassMethod:(SEL)selector do:(id)block;
 
 /**
  Adds instance variable for a given class

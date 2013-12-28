@@ -138,13 +138,8 @@
       cachePolicy:(NSInteger)cachePolicy
        expiration:(NSTimeInterval)expiration
 {
-    [self defineMethod:sel do:^id(TZRESTService *_self, ...) {
-        va_list ap;
-        va_start(ap, _self);
-        NSDictionary *params = va_arg(ap, id);
-        TZRESTCallback callback = va_arg(ap, id);
-        NSString *path = path_;
-        va_end(ap);
+    [self defineMethod:sel do:^id(TZRESTService *_self, NSDictionary *params, TZRESTCallback callback) {
+        NSString *path = [path_ copy];
 
         if ([_self.delegate respondsToSelector:@selector(RESTService:beforeCreateRequestWithPath:params:callback:)]) {
             [_self.delegate RESTService:_self
